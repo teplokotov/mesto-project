@@ -9,3 +9,113 @@
 
 /* Page block */
 @import url(../blocks/page/page.css);
+
+/* Header */
+/* @import url(../blocks/header/header.css); */
+
+.header {
+  padding: 45px 0 41px 0;
+  border-bottom: 1px solid #545454;
+}
+.header__logo {
+  width: 142px;
+  height: 33px;
+}
+.logo {
+  background-image: url(../../images/logo.svg);
+  background-size: cover;
+}
+.profile {
+  padding: 40px 0 50px 0;
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  justify-content: start;
+  align-items: center;
+}
+.profile__avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+.info {
+  padding-left: 30px;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+.info__name {
+  margin: 0;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 48px;
+  color: #fff;
+}
+.info__status {
+  margin: 0;
+  padding-top: 7px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #fff;
+}
+.info__edit-btn {
+  margin-left: 18px;
+  margin-top: 15px;
+}
+.edit-btn {
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #fff;
+  background-image: url(../images/edit.svg);
+  background-color: #000;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  transition: opacity 0.1s linear;
+}
+.edit-btn:hover {
+  opacity: 0.6;
+}
+.profile__add-btn {
+  justify-self: end;
+}
+.add-btn {
+  padding: 0;
+  width: 150px;
+  height: 50px;
+  border: 2px solid #fff;
+  background-image: url(../images/add.svg);
+  background-color: #000;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+  cursor: pointer;
+  transition: opacity 0.1s linear;
+}
+.add-btn:hover {
+  opacity: 0.6;
+}
+
+.elements {
+}
+.element {
+}
+.element__image {
+}
+.element__title {
+}
+.element__like {
+}
+.footer {
+  padding: 66px 0 60px 0;
+}
+.footer__text {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #545454;
+}
+
+
