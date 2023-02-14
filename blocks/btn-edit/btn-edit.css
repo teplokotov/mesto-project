@@ -1,0 +1,28 @@
+.btn-edit {
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #fff;
+  background-image: url(../../images/edit.svg);
+  background-color: #000;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  transition: opacity 0.1s linear;
+}
+
+.btn-edit:hover {
+  opacity: 0.6;
+}
+
+.btn-edit:focus {
+  outline: none;
+}
+
+@media (max-width: 879px) {
+  .btn-edit {
+    width: 18px;
+    height: 18px;
+  }
+}

@@ -1,0 +1,12 @@
+.form {
+  grid-area: dialog;
+  padding: 34px 36px 37px 36px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+@media (max-width: 879px) {
+  .form {
+    padding: 25px 22px;
+  }
+}

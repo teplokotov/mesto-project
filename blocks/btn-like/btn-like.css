@@ -1,0 +1,35 @@
+.btn-like {
+  padding: 0;
+  position: relative;
+  width: 22px;
+  height: 19px;
+  border: none;
+  background-image: url(../../images/like.svg);
+  background-color: #fff;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.btn-like::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: url(../../images/like.svg);
+  background-position: -22px 0;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.1s linear;
+}
+
+.btn-like:hover::after {
+  opacity: 1;
+  transition: opacity 0.1s linear;
+}
+
+.btn-like:focus {
+  outline: none;
+}

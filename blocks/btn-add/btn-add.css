@@ -1,0 +1,28 @@
+.btn-add {
+  padding: 0;
+  width: 150px;
+  height: 50px;
+  border: 2px solid #fff;
+  background-image: url(../../images/add.svg);
+  background-color: #000;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: opacity 0.1s linear;
+}
+
+.btn-add:hover {
+  opacity: 0.6;
+}
+
+.btn-add:focus {
+  outline: none;
+}
+
+@media (max-width: 879px) {
+  .btn-add {
+    width: 100%;
+  }
+}

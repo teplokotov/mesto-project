@@ -1,0 +1,19 @@
+.popup__container {
+  width: calc(100% - 38px);
+  max-width: 470px;
+  display: grid;
+  grid-template-areas:
+    ". close"
+    "dialog .";
+  grid-template-columns: 1fr 40px;
+}
+
+@media (max-width: 879px) {
+  .popup__container {
+    grid-template-areas:
+      "close"
+      "dialog";
+    grid-template-columns: 1fr;
+    grid-template-rows: 36px 1fr;
+  }
+}

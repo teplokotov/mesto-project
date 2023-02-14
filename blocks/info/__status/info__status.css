@@ -1,0 +1,27 @@
+.info__status {
+  margin: 0;
+  padding-top: 7px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #fff;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+@media (max-width: 879px) {
+  .info__status {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    max-width: calc(100vw - 38px - 56px);
+  }
+}
+
+@media (max-width: 320px) {
+  .info__status {
+    max-width: 226px;
+  }
+}

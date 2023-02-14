@@ -1,0 +1,9 @@
+.form__input_name {
+  margin-top: 38px;
+}
+
+@media (max-width: 879px) {
+  .form__input_name {
+    margin-top: 65px;
+  }
+}

@@ -1,0 +1,11 @@
+.info {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-auto-rows: auto auto;
+}
+
+@media (max-width: 879px) {
+  .info{
+    grid-template-columns: minmax(min-content, calc(100% - 38px)) 0;
+  }
+}

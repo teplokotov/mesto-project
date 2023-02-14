@@ -1,0 +1,12 @@
+.element {
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: auto 42px;
+  grid-auto-rows: auto 79px;
+  align-items: center;
+  grid-template-areas:
+    "photo photo"
+    "title like";
+}

@@ -1,0 +1,19 @@
+.btn-close {
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background-image: url(../../images/close.svg);
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+@media (max-width: 879px) {
+  .btn-close {
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+  }
+}

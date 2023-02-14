@@ -1,0 +1,11 @@
+.popup__btn-close {
+  margin: 0 0 8px 8px;
+  grid-area: close;
+}
+
+@media (max-width: 879px) {
+  .popup__btn-close {
+    margin: 0 0 16px 0;
+    justify-self: end;
+  }
+}
