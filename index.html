@@ -13,45 +13,45 @@
     </header>
     <main>
       <section class="profile">
-        <img class="profile__avatar" src="./images/kusto.jpg" alt="Жак-Ив Кусто">
-        <div class="info">
+        <img class="profile__avatar" src="./images/kusto.jpg" alt="Фото профиля">
+        <div class="info profile__info">
           <h1 class="info__name">Жак-Ив Кусто</h1>
-          <button class="edit-btn info__edit-btn"></button>
+          <button class="btn-edit info__btn-edit" onclick="window.popupEdit.classList.toggle('popup_opened');"></button>
           <p class="info__status">Исследователь океана</p>
         </div>
-        <button class="add-btn profile__add-btn"></button>
+        <button class="btn-add profile__btn-add"></button>
       </section>
       <section class="elements" aria-label="Лента фотографий">
         <ul class="elements__list">
           <li class="element">
             <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаевск">
             <h2 class="element__title">Карачаевск</h2>
-            <button class="element__like">2</button>
+            <button class="btn-like element__like btn-like_liked"></button>
           </li>
           <li class="element">
             <img class="element__image" src="./images/elbrus.jpg" alt="Гора Эльбрус">
             <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="element__like">2</button>
+            <button class="btn-like element__like"></button>
           </li>
           <li class="element">
             <img class="element__image" src="./images/dombaj.jpg" alt="Домбай">
             <h2 class="element__title">Домбай</h2>
-            <button class="element__like">2</button>
+            <button class="btn-like element__like"></button>
           </li>
           <li class="element">
             <img class="element__image" src="./images/elbrus.jpg" alt="Гора Эльбрус">
             <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="element__like">2</button>
+            <button class="btn-like element__like"></button>
           </li>
           <li class="element">
             <img class="element__image" src="./images/dombaj.jpg" alt="Домбай">
             <h2 class="element__title">Домбай</h2>
-            <button class="element__like">2</button>
+            <button class="btn-like element__like"></button>
           </li>
           <li class="element">
             <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаево-Черкесия">
             <h2 class="element__title">Карачаево-Черкесия</h2>
-            <button class="element__like">2</button>
+            <button class="btn-like element__like"></button>
           </li>
         </ul>
       </section>
@@ -59,6 +59,19 @@
     <footer class="footer">
       <p class="footer__text">© 2020 Mesto Russia</p>
     </footer>
+  </div>
+  <div id="popupEdit" class="popup">
+    <div class="popup__container">
+      <form class="form">
+        <fieldset class="form__fieldset">
+          <legend class="form__title">Редактировать профиль</legend>
+          <input class="form__input form__input_name" type="text" name="profileName" id="profileName" placeholder="Имя" value="Жак-Ив Кусто">
+          <input class="form__input form__input_status" type="text" name="profileStatus" id="profileStatus" placeholder="Статус" value="Исследователь океана">
+          <input class="btn-save form__button" type="submit" value="Сохранить">
+        </fieldset>
+      </form>
+      <button class="btn-close popup__btn-close" onclick="window.popupEdit.classList.toggle('popup_opened');"></button>
+    </div>
   </div>
 </body>
 </html>
