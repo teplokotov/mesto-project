@@ -19,3 +19,10 @@
 .btn-save:focus {
   outline: none;
 }
+
+@media (max-width: 879px) {
+  .btn-save {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

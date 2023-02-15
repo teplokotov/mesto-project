@@ -51,7 +51,5 @@
 @import url(../blocks/form/__fieldset/form__fieldset.css);
 @import url(../blocks/form/__title/form__title.css);
 @import url(../blocks/form/__input/form__input.css);
-@import url(../blocks/form/__input/_name/form__input_name.css);
-@import url(../blocks/form/__input/_status/form__input_status.css);
 @import url(../blocks/form/__button/form__button.css);
 @import url(../blocks/btn-save/btn-save.css);

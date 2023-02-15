@@ -16,42 +16,42 @@
         <img class="profile__avatar" src="./images/kusto.jpg" alt="Фото профиля">
         <div class="info profile__info">
           <h1 class="info__name">Жак-Ив Кусто</h1>
-          <button class="btn-edit info__btn-edit" onclick="window.popupEdit.classList.toggle('popup_opened');"></button>
+          <button class="btn-edit info__btn-edit" type="button" onclick="window.popupEdit.classList.toggle('popup_opened');"></button>
           <p class="info__status">Исследователь океана</p>
         </div>
-        <button class="btn-add profile__btn-add"></button>
+        <button class="btn-add profile__btn-add" type="button"></button>
       </section>
       <section class="elements" aria-label="Лента фотографий">
         <ul class="elements__list">
           <li class="element">
             <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаевск">
             <h2 class="element__title">Карачаевск</h2>
-            <button class="btn-like element__like btn-like_liked"></button>
+            <button class="btn-like element__like btn-like_liked" type="button"></button>
           </li>
           <li class="element">
             <img class="element__image" src="./images/elbrus.jpg" alt="Гора Эльбрус">
             <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="btn-like element__like"></button>
+            <button class="btn-like element__like" type="button"></button>
           </li>
           <li class="element">
             <img class="element__image" src="./images/dombaj.jpg" alt="Домбай">
             <h2 class="element__title">Домбай</h2>
-            <button class="btn-like element__like"></button>
+            <button class="btn-like element__like" type="button"></button>
           </li>
           <li class="element">
             <img class="element__image" src="./images/elbrus.jpg" alt="Гора Эльбрус">
             <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="btn-like element__like"></button>
+            <button class="btn-like element__like" type="button"></button>
           </li>
           <li class="element">
             <img class="element__image" src="./images/dombaj.jpg" alt="Домбай">
             <h2 class="element__title">Домбай</h2>
-            <button class="btn-like element__like"></button>
+            <button class="btn-like element__like" type="button"></button>
           </li>
           <li class="element">
             <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаево-Черкесия">
             <h2 class="element__title">Карачаево-Черкесия</h2>
-            <button class="btn-like element__like"></button>
+            <button class="btn-like element__like" type="button"></button>
           </li>
         </ul>
       </section>
@@ -62,15 +62,15 @@
   </div>
   <div id="popupEdit" class="popup">
     <div class="popup__container">
-      <form class="form">
+      <form class="form" name="formEdit">
+        <h3 class="form__title">Редактировать профиль</h3>
         <fieldset class="form__fieldset">
-          <legend class="form__title">Редактировать профиль</legend>
-          <input class="form__input form__input_name" type="text" name="profileName" id="profileName" placeholder="Имя" value="Жак-Ив Кусто">
-          <input class="form__input form__input_status" type="text" name="profileStatus" id="profileStatus" placeholder="Статус" value="Исследователь океана">
-          <input class="btn-save form__button" type="submit" value="Сохранить">
+          <input class="form__input" type="text" name="profileName" id="profileName" placeholder="Имя" value="Жак-Ив Кусто">
+          <input class="form__input" type="text" name="profileStatus" id="profileStatus" placeholder="Статус" value="Исследователь океана">
+          <button class="btn-save form__button" type="submit">Сохранить</button>
         </fieldset>
       </form>
-      <button class="btn-close popup__btn-close" onclick="window.popupEdit.classList.toggle('popup_opened');"></button>
+      <button class="btn-close popup__btn-close" onclick="window.popupEdit.classList.toggle('popup_opened');" type="button"></button>
     </div>
   </div>
 </body>

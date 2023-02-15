@@ -1,7 +1,13 @@
 .form__fieldset {
   margin: 0;
-  padding: 0;
+  padding: 18px 0 0 0;
   border: 0;
   display: flex;
   flex-direction: column;
+}
+
+@media (max-width: 879px) {
+  .form__fieldset {
+    padding: 45px 0 0 0;
+  }
 }
