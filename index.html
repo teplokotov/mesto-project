@@ -24,7 +24,7 @@
       </section>
       <section class="elements" aria-label="Лента фотографий">
         <ul class="elements__list">
-          <li class="element">
+          <!-- <li class="element">
             <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаевск">
             <h2 class="element__title">Карачаевск</h2>
             <button class="btn-like element__like btn-like_liked" type="button"></button>
@@ -53,7 +53,7 @@
             <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаево-Черкесия">
             <h2 class="element__title">Карачаево-Черкесия</h2>
             <button class="btn-like element__like" type="button"></button>
-          </li>
+          </li> -->
         </ul>
       </section>
     </main>
@@ -74,5 +74,13 @@
       <button class="btn-close popup__btn-close" type="button"></button>
     </div>
   </div>
+
+  <template id="card-template">
+    <li class="element">
+      <img class="element__image">
+      <h2 class="element__title"></h2>
+      <button class="btn-like element__like btn-like_liked" type="button"></button>
+    </li>
+  </template>
 </body>
 </html>
