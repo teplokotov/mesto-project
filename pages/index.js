@@ -2,6 +2,7 @@ const btnEdit = document.querySelector('.btn-edit');
 const popupEdit = document.querySelector('#popupEdit');
 const btnClose = document.querySelector('.btn-close');
 const formElement = document.querySelector('.form');
+const cardsContainer = document.querySelector('.elements__list');
 
 const initialCards = [
   {
@@ -40,7 +41,7 @@ btnEdit.addEventListener('click', function (evt) {
 });
 
 // Closing modal window
-function closePopup (item) {
+function closePopup(item) {
   item.target.closest('.popup').classList.remove('popup_opened');
 }
 
@@ -58,3 +59,20 @@ formElement.addEventListener('submit', function (evt) {
   document.querySelector('.info__status').textContent = inputUserStatus;
   closePopup(evt);
 });
+
+function addCard(name, link) {
+  const cardTemplate = document.querySelector('#card-template').content;
+  const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
+  cardElement.querySelector('.element__image').setAttribute('alt', name);
+  cardElement.querySelector('.element__image').setAttribute('src', link);
+  cardElement.querySelector('.element__title').textContent = name;
+  cardsContainer.append(cardElement);
+}
+
+function drawCards(cards) {
+  cards.forEach((item) => {
+    addCard(item.name, item.link);
+  });
+}
+
+drawCards(initialCards);
