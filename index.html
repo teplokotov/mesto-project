@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
   <link href="./pages/index.css" rel="stylesheet">
+  <script src="./pages/index.js" defer></script>
 </head>
 <body class="body">
   <div class="page">
@@ -16,7 +17,7 @@
         <img class="profile__avatar" src="./images/kusto.jpg" alt="Фото профиля">
         <div class="info profile__info">
           <h1 class="info__name">Жак-Ив Кусто</h1>
-          <button class="btn-edit info__btn-edit" type="button" onclick="window.popupEdit.classList.toggle('popup_opened');"></button>
+          <button class="btn-edit info__btn-edit" type="button"></button>
           <p class="info__status">Исследователь океана</p>
         </div>
         <button class="btn-add profile__btn-add" type="button"></button>
@@ -70,7 +71,7 @@
           <button class="btn-save form__button" type="submit">Сохранить</button>
         </fieldset>
       </form>
-      <button class="btn-close popup__btn-close" onclick="window.popupEdit.classList.toggle('popup_opened');" type="button"></button>
+      <button class="btn-close popup__btn-close" type="button"></button>
     </div>
   </div>
 </body>
