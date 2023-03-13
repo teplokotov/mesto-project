@@ -9,9 +9,6 @@ const formProfile = popupEdit.querySelector('.form');
 const formNewElement = popupNewElement.querySelector('.form');
 const cardsContainer = document.querySelector('.elements__list');
 
-// Initial drawing cards
-drawCards(elements);
-
 // Open modal window (Edit profile)
 btnEdit.addEventListener('click', function (evt) {
   const userName = document.querySelector('.info__name').textContent;
@@ -65,6 +62,9 @@ function drawCards(cards) {
     addCard(item.name, item.link, 'append');
   });
 };
+
+// Initial drawing cards
+drawCards(elements);
 
 // Open modal window (Add new card)
 btnAdd.addEventListener('click', function () {

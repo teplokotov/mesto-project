@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
   <link href="./pages/index.css" rel="stylesheet">
-  <script type="module" src="./pages/index.js" defer></script>
+  <script type="module" src="./pages/index.js"></script>
 </head>
 <body class="body">
   <div class="page">
@@ -23,38 +23,7 @@
         <button class="btn-add profile__btn-add" type="button"></button>
       </section>
       <section class="elements" aria-label="Лента фотографий">
-        <ul class="elements__list">
-          <!-- <li class="element">
-            <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаевск">
-            <h2 class="element__title">Карачаевск</h2>
-            <button class="btn-like element__like btn-like_liked" type="button"></button>
-          </li>
-          <li class="element">
-            <img class="element__image" src="./images/elbrus.jpg" alt="Гора Эльбрус">
-            <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="btn-like element__like" type="button"></button>
-          </li>
-          <li class="element">
-            <img class="element__image" src="./images/dombaj.jpg" alt="Домбай">
-            <h2 class="element__title">Домбай</h2>
-            <button class="btn-like element__like" type="button"></button>
-          </li>
-          <li class="element">
-            <img class="element__image" src="./images/elbrus.jpg" alt="Гора Эльбрус">
-            <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="btn-like element__like" type="button"></button>
-          </li>
-          <li class="element">
-            <img class="element__image" src="./images/dombaj.jpg" alt="Домбай">
-            <h2 class="element__title">Домбай</h2>
-            <button class="btn-like element__like" type="button"></button>
-          </li>
-          <li class="element">
-            <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаево-Черкесия">
-            <h2 class="element__title">Карачаево-Черкесия</h2>
-            <button class="btn-like element__like" type="button"></button>
-          </li> -->
-        </ul>
+        <ul class="elements__list"></ul>
       </section>
     </main>
     <footer class="footer">
@@ -89,6 +58,7 @@
   </div>
   <template id="card-template">
     <li class="element">
+      <button class="btn-trash element__trash" type="button"></button>
       <img class="element__image">
       <h2 class="element__title"></h2>
       <button class="btn-like element__like" type="button"></button>
