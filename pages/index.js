@@ -4,7 +4,7 @@ const btnEdit = document.querySelector('.btn-edit');
 const popupEdit = document.querySelector('#popupEdit');
 const btnAdd = document.querySelector('.btn-add');
 const popupNewElement = document.querySelector('#popupNewElement');
-const btnsClose = document.querySelectorAll('.btn-close');
+const closeBtns = document.querySelectorAll('.btn-close');
 const formProfile = popupEdit.querySelector('.form');
 const formNewElement = popupNewElement.querySelector('.form');
 const cardsContainer = document.querySelector('.elements__list');
@@ -24,7 +24,7 @@ function closePopup(item) {
 };
 
 // Close each modal windows by 'close' buttons
-btnsClose.forEach(function (btn) {
+closeBtns.forEach(function (btn) {
   btn.addEventListener('click', function (evt) {
     closePopup(evt);
   });
