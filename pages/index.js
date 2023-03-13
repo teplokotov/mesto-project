@@ -47,13 +47,17 @@ function addCard(name, link, place) {
   cardElement.querySelector('.element__image').setAttribute('alt', name);
   cardElement.querySelector('.element__image').setAttribute('src', link);
   cardElement.querySelector('.element__title').textContent = name;
-
+  // Making like/unlike
   const btnLike = cardElement.querySelector('.btn-like');
   btnLike.addEventListener('click', function () {
     btnLike.classList.toggle('btn-like_liked');
   });
-
   place === 'append' ? cardsContainer.append(cardElement) : cardsContainer.prepend(cardElement);
+  // Deleting card
+  const btnTrash = cardElement.querySelector('.btn-trash');
+  btnTrash.addEventListener('click', function (evt) {
+    evt.target.closest('.element').remove();
+  });
 };
 
 // Drawing cards
