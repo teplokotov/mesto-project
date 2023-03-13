@@ -47,17 +47,36 @@ function addCard(name, link, place) {
   cardElement.querySelector('.element__image').setAttribute('alt', name);
   cardElement.querySelector('.element__image').setAttribute('src', link);
   cardElement.querySelector('.element__title').textContent = name;
-  // Making like/unlike
+  // Make like/unlike
   const btnLike = cardElement.querySelector('.btn-like');
   btnLike.addEventListener('click', function () {
     btnLike.classList.toggle('btn-like_liked');
   });
-  place === 'append' ? cardsContainer.append(cardElement) : cardsContainer.prepend(cardElement);
-  // Deleting card
+  // Delete card
   const btnTrash = cardElement.querySelector('.btn-trash');
   btnTrash.addEventListener('click', function (evt) {
     evt.target.closest('.element').remove();
   });
+  // Open popup with photo
+  const curPhoto = cardElement.querySelector('.element__image');
+  curPhoto.addEventListener('click', function (evt) {
+    const figTemplate = document.querySelector('#figure-template').content;
+    const figElement = figTemplate.querySelector('.figure').cloneNode(true);
+    figElement.querySelector('.figure__image').setAttribute('alt', name);
+    figElement.querySelector('.figure__image').setAttribute('src', link);
+    figElement.querySelector('.figure__caption').textContent = name;
+    const popupShowPhoto = document.querySelector('#popupShowPhoto');
+    // Remove previous photo
+    const photoContainer = popupShowPhoto.querySelector('.popup__container');
+    const prevPhoto = photoContainer.querySelector('.figure');
+    if(prevPhoto) {
+      prevPhoto.remove();
+    }
+    // Add selected photo to popup
+    photoContainer.append(figElement);
+    popupShowPhoto.classList.add('popup_opened');
+  });
+  place === 'append' ? cardsContainer.append(cardElement) : cardsContainer.prepend(cardElement);
 };
 
 // Drawing cards

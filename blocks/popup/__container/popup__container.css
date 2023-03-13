@@ -1,6 +1,4 @@
 .popup__container {
-  width: calc(100% - 38px);
-  max-width: 470px;
   display: grid;
   grid-template-areas:
     ". close"

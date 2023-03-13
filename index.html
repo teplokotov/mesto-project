@@ -31,7 +31,7 @@
     </footer>
   </div>
   <div id="popupEdit" class="popup">
-    <div class="popup__container">
+    <div class="popup__container popup__container_form">
       <form class="form" name="formEdit">
         <h3 class="form__title">Редактировать профиль</h3>
         <fieldset class="form__fieldset">
@@ -44,7 +44,7 @@
     </div>
   </div>
   <div id="popupNewElement" class="popup">
-    <div class="popup__container">
+    <div class="popup__container popup__container_form">
       <form class="form" name="formNewElement">
         <h3 class="form__title">Новое место</h3>
         <fieldset class="form__fieldset">
@@ -56,6 +56,17 @@
       <button class="btn-close popup__btn-close" type="button"></button>
     </div>
   </div>
+  <div id="popupShowPhoto" class="popup">
+    <div class="popup__container">
+      <button class="btn-close popup__btn-close" type="button"></button>
+    </div>
+  </div>
+  <template id="figure-template">
+    <figure class="figure">
+      <img class="figure__image">
+      <figcaption class="figure__caption"></figcaption>
+    </figure>
+  </template>
   <template id="card-template">
     <li class="element">
       <button class="btn-trash element__trash" type="button"></button>
