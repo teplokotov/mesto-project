@@ -4,7 +4,7 @@
 - Результат: [Ссылка](https://teplokotov.github.io/mesto-project/)
 ## Этап 2: Реализация функциональности на JavaScript
 ### Описание
-- Отправлен на проверку 00.03.2023 / дедлайн 09.04.2023
+- Отправлен на проверку 13.03.2023 / дедлайн 09.04.2023
 - Задание: [Ссылка](https://code.s3.yandex.net/web-plus/static/third-month/mesto-project/index.html)
 - Чеклист по самопроверке №4: [Ссылка](https://code.s3.yandex.net/web-developer/checklists-pdf/web-plus/checklist-4.pdf)
 ## Этап 1: Адаптивная вёрстка
