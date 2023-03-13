@@ -2,9 +2,15 @@ import elements from '../blocks/elements/elements.js';
 
 const btnEdit = document.querySelector('.btn-edit');
 const popupEdit = document.querySelector('#popupEdit');
-const btnClose = document.querySelector('.btn-close');
-const formElement = document.querySelector('.form');
+const btnAdd = document.querySelector('.btn-add');
+const popupNewElement = document.querySelector('#popupNewElement');
+const btnsClose = document.querySelectorAll('.btn-close');
+const formProfile = popupEdit.querySelector('.form');
+const formNewElement = popupNewElement.querySelector('.form');
 const cardsContainer = document.querySelector('.elements__list');
+
+// Initial drawing cards
+drawCards(elements);
 
 // Open modal window (Edit profile)
 btnEdit.addEventListener('click', function (evt) {
@@ -20,13 +26,15 @@ function closePopup(item) {
   item.target.closest('.popup').classList.remove('popup_opened');
 };
 
-// Close modal window by 'close' button
-btnClose.addEventListener('click', function (evt) {
-  closePopup(evt);
+// Close each modal windows by 'close' buttons
+btnsClose.forEach(function (btn) {
+  btn.addEventListener('click', function (evt) {
+    closePopup(evt);
+  });
 });
 
 // Set name and status from modal window to page and close modal window
-formElement.addEventListener('submit', function (evt) {
+formProfile.addEventListener('submit', function (evt) {
   evt.preventDefault();
   const inputUserName = document.querySelector('#profileName').value;
   const inputUserStatus = document.querySelector('#profileStatus').value;
@@ -35,19 +43,35 @@ formElement.addEventListener('submit', function (evt) {
   closePopup(evt);
 });
 
-function addCard(name, link) {
+// Adding card to list
+function addCard(name, link, place) {
   const cardTemplate = document.querySelector('#card-template').content;
   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
   cardElement.querySelector('.element__image').setAttribute('alt', name);
   cardElement.querySelector('.element__image').setAttribute('src', link);
   cardElement.querySelector('.element__title').textContent = name;
-  cardsContainer.append(cardElement);
+  place === 'append' ? cardsContainer.append(cardElement) : cardsContainer.prepend(cardElement);
 };
 
+// Drawing cards
 function drawCards(cards) {
   cards.forEach((item) => {
-    addCard(item.name, item.link);
+    addCard(item.name, item.link, 'append');
   });
 };
 
-drawCards(elements);
+// Open modal window (Add new card)
+btnAdd.addEventListener('click', function () {
+  popupNewElement.classList.add('popup_opened');
+});
+
+// Add new card and close modal window
+formNewElement.addEventListener('submit', function (evt) {
+  evt.preventDefault();
+  const elementName = document.querySelector('#elementName').value;
+  const elementLink = document.querySelector('#elementLink').value;
+  addCard(elementName, elementLink);
+  document.querySelector('#elementName').value = '';
+  document.querySelector('#elementLink').value = '';
+  closePopup(evt);
+});
