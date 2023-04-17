@@ -20,6 +20,14 @@
   outline: none;
 }
 
+.btn-save:disabled {
+  cursor: default;
+  color: #000;
+  border: 1px solid #000;
+  background-color: #fff;
+  opacity: 0.2;
+}
+
 @media (max-width: 879px) {
   .btn-save {
     font-size: 14px;
