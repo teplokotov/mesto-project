@@ -41,14 +41,14 @@
             pattern="^[a-zA-Zа-яА-ЯёЁ\-\s]+$"
             data-error-message="Разрешены только кириллические и латинские буквы, знаки дефиса и пробелы."
             required>
-          <span class="form__input-error profile-name-input-error form__input-error_active">Адрес электронной почты должен содержать символ «@». Похоже, вы его пропустили: sdf.</span>
+          <span class="form__input-error profileName-error"></span>
           <input class="form__input" type="text" name="profileStatus" id="profileStatus" placeholder="Статус"
             minlength="2"
             maxlength="200"
             pattern="^[a-zA-Zа-яА-ЯёЁ\-\s]+$"
             data-error-message="Разрешены только кириллические и латинские буквы, знаки дефиса и пробелы."
             required>
-          <span class="form__input-error profile-status-input-error form__input-error_active">Адрес электронной почты должен содержать символ «@». Похоже, вы его пропустили: sdf.</span>
+          <span class="form__input-error profileStatus-error"></span>
           <button class="btn-save form__button" type="submit">Сохранить</button>
         </fieldset>
       </form>
@@ -66,12 +66,12 @@
           pattern="^[a-zA-Zа-яА-ЯёЁ\-\s]+$"
           data-error-message="Введите адрес сайта."
           required>
-          <span class="form__input-error element-name-input-error form__input-error_active">Адрес электронной почты должен содержать символ «@». Похоже, вы его пропустили: sdf.</span>
+          <span class="form__input-error elementName-error"></span>
           <input class="form__input" type="url" name="elementLink" id="elementLink" placeholder="Ссылка на картинку"
-          pattern="^(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?$"
+          pattern="^https?:\/\/(.+?)\/(([a-zA-Z0-9_ \-%\.]*)\.(jpg|png|jpeg|gif))$"
           data-error-message="Введите адрес сайта."
           required>
-          <span class="form__input-error element-link-input-error form__input-error_active">Адрес электронной почты должен содержать символ «@». Похоже, вы его пропустили: sdf.</span>
+          <span class="form__input-error elementLink-error"></span>
           <button class="btn-save form__button" type="submit">Создать</button>
         </fieldset>
       </form>

@@ -22,6 +22,7 @@ const photoContainer = popupShowPhoto.querySelector('.popup__container');
 const prevPhoto = photoContainer.querySelector('.figure');
 const elementName = document.querySelector('#elementName');
 const elementLink = document.querySelector('#elementLink');
+const formList = Array.from(document.querySelectorAll('.form'));
 
 // Opening modal window
 function openPopup(item) {
@@ -42,7 +43,7 @@ function closePopup(item) {
 
 function hideClosestPopup(evt) {
   closePopup(evt.target.closest('.popup'));
-}
+};
 
 // Close each modal windows by 'close' buttons
 closeBtns.forEach(function (btn) {
@@ -86,7 +87,7 @@ function createCard(name, link) {
     openPopup(popupShowPhoto);
   });
   return cardElement;
-}
+};
 
 // Adding card to list
 function addCard(name, link, place) {
@@ -116,3 +117,83 @@ formNewElement.addEventListener('submit', function (evt) {
   evt.target.reset();
   hideClosestPopup(evt);
 });
+
+// Showing error message
+function showInputError (formElement, inputElement, errorMessage) {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  // Decorate input field
+  inputElement.classList.add('form__input_type_error');
+  // Show error message (custom or default)
+  if (inputElement.validity.patternMismatch) {
+    errorElement.textContent = inputElement.dataset.errorMessage
+  } else {
+    errorElement.textContent = errorMessage;
+  }
+  errorElement.classList.add('form__input-error_active');
+};
+
+// Hiding error message
+function hideInputError(formElement, inputElement) {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  // Remove decoration of input field
+  inputElement.classList.remove('form__input_type_error');
+  // Remove error message
+  errorElement.classList.remove('form__input-error_active');
+  errorElement.textContent = '';
+};
+
+// Changing visibility of error messages
+function toggleErrorMessage(formElement, inputElement) {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    hideInputError(formElement, inputElement);
+  }
+};
+
+// Checking input fields for validity (includes all validity pattern)
+function hasInvalidInput(inputList) {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+};
+
+// Making button 'disabled' if some input field is invalid
+function toggleButtonState (inputList, buttonElement) {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.setAttribute('disabled', 'disabled');
+  } else {
+    buttonElement.removeAttribute('disabled', 'disabled');
+  }
+};
+
+// Setting event listeners for each input fileds of given fieldsetList
+function setEventListeners(formElement) {
+  const inputList = Array.from(formElement.querySelectorAll('.form__input'));
+  const btnSave = formElement.querySelector('.btn-save');
+  // Initial check for 'New place' form
+  if (formElement.parentElement.name === 'formNewElement') toggleButtonState(inputList, btnSave);
+  inputList.forEach(inputElement => {
+    inputElement.addEventListener('input', function () {
+      toggleButtonState(inputList, btnSave);
+      toggleErrorMessage(formElement, inputElement);
+    });
+  });
+};
+
+// Enabling validation
+function enableValidation() {
+  formList.forEach((formElement) => {
+    // Disable default error message style for all forms
+    formElement.addEventListener('submit', function (evt) {
+      evt.preventDefault();
+    });
+    // Add setEventListeners() for each fieldsets of all forms
+    const fieldsetList = Array.from(formElement.querySelectorAll('.form__fieldset'));
+    fieldsetList.forEach(fieldset => {
+      setEventListeners(fieldset);
+    });
+  });
+};
+
+enableValidation();
