@@ -4,7 +4,7 @@ const btnEdit = document.querySelector('.btn-edit');
 const popupEdit = document.querySelector('#popupEdit');
 const btnAdd = document.querySelector('.btn-add');
 const popupNewElement = document.querySelector('#popupNewElement');
-const closeBtns = document.querySelectorAll('.btn-close');
+//const closeBtns = document.querySelectorAll('.btn-close');
 const formProfile = document.forms["formEdit"];
 const formNewElement = document.forms["formNewElement"];
 const cardsContainer = document.querySelector('.elements__list');
@@ -23,6 +23,7 @@ const prevPhoto = photoContainer.querySelector('.figure');
 const elementName = document.querySelector('#elementName');
 const elementLink = document.querySelector('#elementLink');
 const formList = Array.from(document.querySelectorAll('.form'));
+const popups = document.querySelectorAll('.popup');
 
 // Opening modal window
 function openPopup(item) {
@@ -46,10 +47,20 @@ function hideClosestPopup(evt) {
 };
 
 // Close each modal windows by 'close' buttons
-closeBtns.forEach(function (btn) {
-  const popup = btn.closest('.popup');
-  btn.addEventListener('click', function (evt) {
-    closePopup(popup);
+// closeBtns.forEach(function (btn) {
+//   const popup = btn.closest('.popup');
+//   btn.addEventListener('click', function (evt) {
+//     closePopup(popup);
+//   });
+// });
+
+popups.forEach(function (popup) {
+  //const popup = btn.closest('.popup');
+  popup.addEventListener('click', function (evt) {
+    if (!evt.target.className.includes('form')) {
+      evt.target.closest('.popup').classList.remove('popup_opened');
+    }
+    //closePopup(evt);
   });
 });
 
