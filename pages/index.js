@@ -4,7 +4,6 @@ const btnEdit = document.querySelector('.btn-edit');
 const popupEdit = document.querySelector('#popupEdit');
 const btnAdd = document.querySelector('.btn-add');
 const popupNewElement = document.querySelector('#popupNewElement');
-//const closeBtns = document.querySelectorAll('.btn-close');
 const formProfile = document.forms["formEdit"];
 const formNewElement = document.forms["formNewElement"];
 const cardsContainer = document.querySelector('.elements__list');
@@ -18,11 +17,8 @@ const figure = document.querySelector('.figure');
 const figureImage = figure.querySelector('.figure__image');
 const figureCaption = figure.querySelector('.figure__caption');
 const popupShowPhoto = document.querySelector('#popupShowPhoto');
-const photoContainer = popupShowPhoto.querySelector('.popup__container');
-const prevPhoto = photoContainer.querySelector('.figure');
 const elementName = document.querySelector('#elementName');
 const elementLink = document.querySelector('#elementLink');
-const formList = Array.from(document.querySelectorAll('.form'));
 const popups = document.querySelectorAll('.popup');
 
 // Opening modal window
@@ -32,38 +28,20 @@ function openPopup(item) {
 
 // Open modal window (Edit profile)
 btnEdit.addEventListener('click', function (evt) {
-  // We allow user to edit only saved information of profile
-  // Set saved input values
-  inputUserName.value = userName.textContent;
-  inputUserStatus.value = userStatus.textContent;
-  // Check input fields and redraw error messages
-  const btnSaveOfProfile = popupEdit.querySelector('.btn-save');
-  const fieldsetOfProfile = popupEdit.querySelector('.form__fieldset');
-  const inputListOfProfile = Array.from(popupEdit.querySelectorAll('.form__input'));
-  toggleButtonState(inputListOfProfile, btnSaveOfProfile);
-  inputListOfProfile.forEach(inputElement => toggleErrorMessage(fieldsetOfProfile, inputElement));
-  // Close popup if press 'Escape'
   window.addEventListener('keydown', closePopupEditByEscape);
-  // Open popup
   openPopup(popupEdit);
 });
 
-function closePopupEditByEscape (evt) {
-  if (evt.key === 'Escape') {
-    closePopup(popupEdit);
-  }
+function closePopupEditByEscape(evt) {
+  if (evt.key === 'Escape') closePopup(popupEdit);
 }
 
-function closePopupNewElementByEscape (evt) {
-  if (evt.key === 'Escape') {
-    closePopup(popupNewElement);
-  }
+function closePopupNewElementByEscape(evt) {
+  if (evt.key === 'Escape') closePopup(popupNewElement);
 }
 
-function closePopupPhotoByEscape (evt) {
-  if (evt.key === 'Escape') {
-    closePopup(popupShowPhoto);
-  }
+function closePopupPhotoByEscape(evt) {
+  if (evt.key === 'Escape') closePopup(popupShowPhoto);
 }
 
 // Closing modal window and removing 'keydown' event listener
@@ -86,6 +64,7 @@ function hideClosestPopup(evt) {
   closePopup(evt.target.closest('.popup'));
 };
 
+// Allow to close each modal windows if click on overlay
 popups.forEach(function (popup) {
   popup.addEventListener('click', function (evt) {
     if (!evt.target.className.includes('form') &&
@@ -152,8 +131,6 @@ drawCards(elements);
 
 // Open modal window (Add new card)
 btnAdd.addEventListener('click', function () {
-  // We allow user to continue editing information for new card and don't clear input fields
-  // Close popup if press 'Escape'
   window.addEventListener('keydown', closePopupNewElementByEscape);
   openPopup(popupNewElement);
 });
@@ -167,43 +144,41 @@ formNewElement.addEventListener('submit', function (evt) {
 });
 
 // Showing error message
-function showInputError (formElement, inputElement, errorMessage) {
+function showInputError (formElement, inputElement, errorMessage, settings) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   // Decorate input field
-  inputElement.classList.add('form__input_type_error');
+  inputElement.classList.add(settings.inputErrorClass);
   // Show error message (custom or default)
   if (inputElement.validity.patternMismatch) {
     errorElement.textContent = inputElement.dataset.errorMessage
   } else {
     errorElement.textContent = errorMessage;
   }
-  errorElement.classList.add('form__input-error_active');
+  errorElement.classList.add(settings.errorClass);
 };
 
 // Hiding error message
-function hideInputError(formElement, inputElement) {
+function hideInputError(formElement, inputElement, settings) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   // Remove decoration of input field
-  inputElement.classList.remove('form__input_type_error');
+  inputElement.classList.remove(settings.inputErrorClass);
   // Remove error message
-  errorElement.classList.remove('form__input-error_active');
+  errorElement.classList.remove(settings.errorClass);
   errorElement.textContent = '';
 };
 
 // Changing visibility of error messages
-function toggleErrorMessage(formElement, inputElement) {
+function toggleErrorMessage(formElement, inputElement, settings) {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(formElement, inputElement, inputElement.validationMessage, settings);
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, settings);
   }
 };
 
 // Checking input fields for validity (includes all validity pattern)
 function hasInvalidInput(inputList) {
-  return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
-  });
+  return inputList.some(inputElement => !inputElement.validity.valid);
 };
 
 // Making button 'disabled' if some input field is invalid
@@ -215,33 +190,39 @@ function toggleButtonState (inputList, buttonElement) {
   }
 };
 
-// Setting event listeners for each input fileds of given fieldsetList
-function setEventListeners(formElement) {
-  const inputList = Array.from(formElement.querySelectorAll('.form__input'));
-  const btnSave = formElement.querySelector('.btn-save');
-  // Initial check for 'New place' form
-  if (formElement.parentElement.name === 'formNewElement') toggleButtonState(inputList, btnSave);
+// Setting event listeners for each input fileds of given forms
+function setEventListeners(formElement, settings) {
+  const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));
+  const btnSave = formElement.querySelector(settings.submitButtonSelector);
   inputList.forEach(inputElement => {
     inputElement.addEventListener('input', function () {
       toggleButtonState(inputList, btnSave);
-      toggleErrorMessage(formElement, inputElement);
+      toggleErrorMessage(formElement, inputElement, settings);
     });
   });
 };
 
-// Enabling validation
-function enableValidation() {
-  formList.forEach((formElement) => {
-    // Disable default error message style for all forms
-    formElement.addEventListener('submit', function (evt) {
-      evt.preventDefault();
-    });
-    // Add setEventListeners() for each fieldsets of all forms
-    const fieldsetList = Array.from(formElement.querySelectorAll('.form__fieldset'));
-    fieldsetList.forEach(fieldset => {
-      setEventListeners(fieldset);
-    });
+// Enabling validation of all forms
+function enableValidation(settings) {
+  const formList = Array.from(document.querySelectorAll(settings.formSelector));
+  formList.forEach(formElement => {
+    // Initial validation after loading page
+    if (formElement.name === 'formEdit') {
+      inputUserName.value = userName.textContent;
+      inputUserStatus.value = userStatus.textContent;
+    }
+    const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));
+    const btnSave = formElement.querySelector(settings.submitButtonSelector);
+    toggleButtonState(inputList, btnSave);
+    // Make validation after changing inputs
+    setEventListeners(formElement, settings);
   });
 };
 
-enableValidation();
+enableValidation({
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.btn-save',
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'form__input-error_active'
+});
