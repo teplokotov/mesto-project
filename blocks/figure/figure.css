@@ -3,4 +3,5 @@
   margin: 0;
   max-width: 75vh;
   max-height: 75vw;
+  cursor: default;
 }

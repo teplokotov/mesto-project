@@ -1,9 +1,9 @@
 .form__button{
-  margin-top: 48px;
+  margin-top: 13px;
 }
 
 @media (max-width: 879px) {
   .form__button{
-    margin-top: 45px;
+    margin-top: 10px;
   }
 }

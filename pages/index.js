@@ -32,13 +32,53 @@ function openPopup(item) {
 
 // Open modal window (Edit profile)
 btnEdit.addEventListener('click', function (evt) {
+  // We allow user to edit only saved information of profile
+  // Set saved input values
   inputUserName.value = userName.textContent;
   inputUserStatus.value = userStatus.textContent;
+  // Check input fields and redraw error messages
+  const btnSaveOfProfile = popupEdit.querySelector('.btn-save');
+  const fieldsetOfProfile = popupEdit.querySelector('.form__fieldset');
+  const inputListOfProfile = Array.from(popupEdit.querySelectorAll('.form__input'));
+  toggleButtonState(inputListOfProfile, btnSaveOfProfile);
+  inputListOfProfile.forEach(inputElement => toggleErrorMessage(fieldsetOfProfile, inputElement));
+  // Close popup if press 'Escape'
+  window.addEventListener('keydown', closePopupEditByEscape);
+  // Open popup
   openPopup(popupEdit);
 });
 
-// Closing modal window
+function closePopupEditByEscape (evt) {
+  if (evt.key === 'Escape') {
+    closePopup(popupEdit);
+  }
+}
+
+function closePopupNewElementByEscape (evt) {
+  if (evt.key === 'Escape') {
+    closePopup(popupNewElement);
+  }
+}
+
+function closePopupPhotoByEscape (evt) {
+  if (evt.key === 'Escape') {
+    closePopup(popupShowPhoto);
+  }
+}
+
+// Closing modal window and removing 'keydown' event listener
 function closePopup(item) {
+  switch (item) {
+    case popupEdit:
+      window.removeEventListener('keydown', closePopupEditByEscape);
+      break;
+    case popupNewElement:
+      window.removeEventListener('keydown', closePopupNewElementByEscape);
+      break;
+    case popupShowPhoto:
+      window.removeEventListener('keydown', closePopupPhotoByEscape);
+      break;
+  }
   item.classList.remove('popup_opened');
 };
 
@@ -46,21 +86,13 @@ function hideClosestPopup(evt) {
   closePopup(evt.target.closest('.popup'));
 };
 
-// Close each modal windows by 'close' buttons
-// closeBtns.forEach(function (btn) {
-//   const popup = btn.closest('.popup');
-//   btn.addEventListener('click', function (evt) {
-//     closePopup(popup);
-//   });
-// });
-
 popups.forEach(function (popup) {
-  //const popup = btn.closest('.popup');
   popup.addEventListener('click', function (evt) {
-    if (!evt.target.className.includes('form')) {
-      evt.target.closest('.popup').classList.remove('popup_opened');
+    if (!evt.target.className.includes('form') &&
+        !evt.target.className.includes('figure') ||
+        evt.target.classList.contains('popup__container')) {
+      hideClosestPopup(evt);
     }
-    //closePopup(evt);
   });
 });
 
@@ -95,6 +127,8 @@ function createCard(name, link) {
     figureImage.setAttribute('alt', name);
     figureImage.setAttribute('src', link);
     figureCaption.textContent = name;
+    // Close popup if press 'Escape'
+    window.addEventListener('keydown', closePopupPhotoByEscape);
     openPopup(popupShowPhoto);
   });
   return cardElement;
@@ -118,6 +152,9 @@ drawCards(elements);
 
 // Open modal window (Add new card)
 btnAdd.addEventListener('click', function () {
+  // We allow user to continue editing information for new card and don't clear input fields
+  // Close popup if press 'Escape'
+  window.addEventListener('keydown', closePopupNewElementByEscape);
   openPopup(popupNewElement);
 });
 
@@ -174,7 +211,7 @@ function toggleButtonState (inputList, buttonElement) {
   if (hasInvalidInput(inputList)) {
     buttonElement.setAttribute('disabled', 'disabled');
   } else {
-    buttonElement.removeAttribute('disabled', 'disabled');
+    buttonElement.removeAttribute('disabled');
   }
 };
 
