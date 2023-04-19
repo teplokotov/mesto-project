@@ -1,4 +1,10 @@
+// Styles
+import '../pages/index.css';
+
+// Initial cards
 import elements from '../blocks/elements/elements.js';
+
+// Modules
 import {  formProfile, formNewElement } from '../components/utils.js';
 import {  settings, enableValidation  } from '../components/validate.js';
 import {  drawCards } from '../components/card.js';

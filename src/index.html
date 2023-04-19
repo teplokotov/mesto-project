@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
-  <link href="./pages/index.css" rel="stylesheet">
-  <script type="module" src="./components/index.js"></script>
 </head>
 <body class="body">
   <div class="page">
@@ -14,7 +12,7 @@
     </header>
     <main>
       <section class="profile">
-        <img class="profile__avatar" src="./images/kusto.jpg" alt="Фото профиля">
+        <img class="profile__avatar" src="<%=require('./images/kusto.jpg')%>" alt="Фото профиля">
         <div class="info profile__info">
           <h1 class="info__name">Жак-Ив Кусто</h1>
           <button class="btn-edit info__btn-edit" type="button"></button>

@@ -1,10 +1,10 @@
 # **Проект «Mesto»**
 - Проект Спринта №2 и Спринта №3 Яндекс Практикума
 - Автор: Филипп Добриков, студент 23 когорты Web+
-- Результат 2 этапа: [Ссылка](https://teplokotov.github.io/mesto-project/)
+- Результат: [Ссылка](https://teplokotov.github.io/mesto-project/)
 ## Этап 3: Валидация форм и инфраструктура
 ### Описание
-- Отправлен на проверку 00.04.2023 / дедлайн 07.05.2023
+- Отправлен на проверку 19.04.2023 / дедлайн 07.05.2023
 - Задание: [Ссылка](https://practicum.yandex.ru/learn/web-plus/courses/467b7164-c86d-4b1f-a89f-52f063a355b4/sprints/37301/topics/11997b4c-d767-4cac-b899-d9ed1fe9c7c6/lessons/e641ad29-f337-4d20-80e8-790918e40ec7/)
 - Чеклист по самопроверке №8: [Ссылка](https://code.s3.yandex.net/web-developer/checklists-pdf/web-plus/checklist-8.pdf)
 ## Этап 2: Реализация функциональности на JavaScript
@@ -38,3 +38,4 @@
 - Figma
 - PerfectPixel by WellDoneCode
 - TinyPNG
+- Webpack 5
