@@ -1,22 +1,13 @@
-import {  settings, resetFormError  } from './validate.js';
-import {  addCard } from './card.js';
-import {  btnSaveProfile,
-          formNewElement,
-          userName,
-          userStatus,
-          inputUserName,
-          inputUserStatus,
-          popupEdit,
+import {  popupEdit,
           popupNewElement,
-          popupShowPhoto,
-          btnSaveCard,
-          elementName,
-          elementLink
+          popupShowPhoto
        } from './utils.js';
 
 // Opening modal window
 export function openPopup(item) {
   item.classList.add('popup_opened');
+  // Close popup if press 'Escape'
+  window.addEventListener('keydown', closePopupByEscape);
 };
 
 // Closing popup by pressing Escape
@@ -37,23 +28,6 @@ export function hideClosestPopup(evt) {
   closePopup(evt.target.closest('.popup'));
 };
 
-// Open modal window (Edit profile)
-export function handleClickBtnEdit(evt) {
-  inputUserName.value = userName.textContent;
-  inputUserStatus.value = userStatus.textContent;
-  resetFormError(popupEdit, [inputUserName, inputUserStatus], btnSaveProfile, settings);
-  window.addEventListener('keydown', closePopupByEscape);
-  openPopup(popupEdit);
-}
-
-// Set name and status from modal window to page and close modal window
-export function handleSubmitFormProfile (evt) {
-  evt.preventDefault();
-  userName.textContent = inputUserName.value;
-  userStatus.textContent = inputUserStatus.value;
-  hideClosestPopup(evt);
-}
-
 // Allow to close each modal windows if click on overlay
 export function setEventListenersOnPopups() {
   [popupEdit, popupNewElement, popupShowPhoto].forEach(function (popup) {
@@ -65,20 +39,4 @@ export function setEventListenersOnPopups() {
       }
     });
   });
-}
-
-// Open modal window (Add new card)
-export function handleClickBtnAdd() {
-  formNewElement.reset();
-  resetFormError(popupNewElement, [elementName, elementLink], btnSaveCard, settings);
-  window.addEventListener('keydown', closePopupByEscape);
-  openPopup(popupNewElement);
-}
-
-// Add new card and close modal window
-export function handleSubmitFormNewElement(evt) {
-  evt.preventDefault();
-  addCard(elementName.value, elementLink.value);
-  evt.target.reset();
-  hideClosestPopup(evt);
 }

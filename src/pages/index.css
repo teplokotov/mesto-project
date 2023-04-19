@@ -15,6 +15,9 @@
 @import url(../blocks/header/__logo/header__logo.css);
 @import url(../blocks/logo/logo.css);
 
+/* Main */
+@import url(../blocks/main/main.css);
+
 /* Profile section */
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
@@ -46,6 +49,7 @@
 /* Popup */
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/popup/_darker/popup_darker.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__container/_form/popup__container_form.css);
 @import url(../blocks/popup/__btn-close/popup__btn-close.css);

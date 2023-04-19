@@ -8,15 +8,26 @@ import elements from '../blocks/elements/elements.js';
 import {  formProfile,
           formNewElement,
           btnEdit,
-          btnAdd
+          btnAdd,
+          cardsContainer,
+          btnSaveProfile,
+          userName,
+          userStatus,
+          inputUserName,
+          inputUserStatus,
+          btnSaveCard,
+          elementName,
+          elementLink
         } from '../components/utils.js';
-import {  settings, enableValidation  } from '../components/validate.js';
-import {  drawCards } from '../components/card.js';
-import {  handleClickBtnEdit,
-          handleSubmitFormProfile,
-          setEventListenersOnPopups,
-          handleClickBtnAdd,
-          handleSubmitFormNewElement
+import {  settings,
+          resetFormError,
+          enableValidation
+        } from '../components/validate.js';
+import {  createCard } from '../components/card.js';
+import {  setEventListenersOnPopups,
+          closePopupByEscape,
+          openPopup,
+          hideClosestPopup
         } from '../components/modal.js';
 
 // Open modal window (Edit profile)
@@ -35,7 +46,48 @@ setEventListenersOnPopups();
 drawCards(elements);
 
 // Open modal window (Add new card)
-btnAdd.addEventListener('click', handleClickBtnAdd );
+btnAdd.addEventListener('click', handleClickBtnAdd);
 
 // Enabling validation of all forms
 enableValidation(settings);
+
+// Adding card to list
+function addCard(name, link, place) {
+  const cardElement = createCard(name, link);
+  place === 'append' ? cardsContainer.append(cardElement) : cardsContainer.prepend(cardElement);
+};
+
+// Drawing cards
+function drawCards(cards) {
+  cards.forEach((item) => {
+    addCard(item.name, item.link, 'append');
+  });
+};
+
+function handleClickBtnEdit(evt) {
+  inputUserName.value = userName.textContent;
+  inputUserStatus.value = userStatus.textContent;
+  resetFormError(popupEdit, [inputUserName, inputUserStatus], btnSaveProfile, settings);
+  openPopup(popupEdit);
+}
+
+function handleSubmitFormProfile(evt) {
+  evt.preventDefault();
+  userName.textContent = inputUserName.value;
+  userStatus.textContent = inputUserStatus.value;
+  hideClosestPopup(evt);
+}
+
+function handleClickBtnAdd() {
+  formNewElement.reset();
+  resetFormError(popupNewElement, [elementName, elementLink], btnSaveCard, settings);
+  window.addEventListener('keydown', closePopupByEscape);
+  openPopup(popupNewElement);
+}
+
+function handleSubmitFormNewElement(evt) {
+  evt.preventDefault();
+  addCard(elementName.value, elementLink.value);
+  evt.target.reset();
+  hideClosestPopup(evt);
+}

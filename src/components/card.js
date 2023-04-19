@@ -1,6 +1,5 @@
 import {  closePopupByEscape, openPopup  } from './modal.js';
-import {  cardsContainer,
-          cardTemplateElement,
+import {  cardTemplateElement,
           figureImage,
           figureCaption,
           popupShowPhoto
@@ -29,22 +28,7 @@ export function createCard(name, link) {
     figureImage.setAttribute('alt', name);
     figureImage.setAttribute('src', link);
     figureCaption.textContent = name;
-    // Close popup if press 'Escape'
-    window.addEventListener('keydown', closePopupByEscape);
     openPopup(popupShowPhoto);
   });
   return cardElement;
-};
-
-// Adding card to list
-export function addCard(name, link, place) {
-  const cardElement = createCard(name, link);
-  place === 'append' ? cardsContainer.append(cardElement) : cardsContainer.prepend(cardElement);
-};
-
-// Drawing cards
-export function drawCards(cards) {
-  cards.forEach((item) => {
-    addCard(item.name, item.link, 'append');
-  });
 };
