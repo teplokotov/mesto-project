@@ -1,17 +1,18 @@
 import {  settings, resetFormError  } from './validate.js';
-import {  btnSaveProfile, formNewElement } from './utils.js';
 import {  addCard } from './card.js';
-
-const userName = document.querySelector('.info__name');
-const userStatus = document.querySelector('.info__status');
-const inputUserName = document.querySelector('#profileName');
-const inputUserStatus = document.querySelector('#profileStatus');
-const popupEdit = document.querySelector('#popupEdit');
-const popupNewElement = document.querySelector('#popupNewElement');
-const popupShowPhoto = document.querySelector('#popupShowPhoto');
-const btnSaveCard = popupNewElement.querySelector(settings.submitButtonSelector);
-const elementName = document.querySelector('#elementName');
-const elementLink = document.querySelector('#elementLink');
+import {  btnSaveProfile,
+          formNewElement,
+          userName,
+          userStatus,
+          inputUserName,
+          inputUserStatus,
+          popupEdit,
+          popupNewElement,
+          popupShowPhoto,
+          btnSaveCard,
+          elementName,
+          elementLink
+       } from './utils.js';
 
 // Opening modal window
 export function openPopup(item) {

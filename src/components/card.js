@@ -1,12 +1,10 @@
 import {  closePopupByEscape, openPopup  } from './modal.js';
-
-const cardsContainer = document.querySelector('.elements__list');
-const cardTemplate = document.querySelector('#card-template').content;
-const cardTemplateElement = cardTemplate.querySelector('.element');
-const figure = document.querySelector('.figure');
-const figureImage = figure.querySelector('.figure__image');
-const figureCaption = figure.querySelector('.figure__caption');
-const popupShowPhoto = document.querySelector('#popupShowPhoto');
+import {  cardsContainer,
+          cardTemplateElement,
+          figureImage,
+          figureCaption,
+          popupShowPhoto
+       } from './utils.js';
 
 // Creating card
 export function createCard(name, link) {
