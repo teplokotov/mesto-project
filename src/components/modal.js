@@ -21,8 +21,10 @@ export function openPopup(item) {
 
 // Closing popup by pressing Escape
 export function closePopupByEscape(evt) {
-  const popupOpened = document.querySelector('.popup_opened');
-  if (evt.key === 'Escape') closePopup(popupOpened);
+  if (evt.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened');
+    closePopup(popupOpened);
+  }
 }
 
 // Closing modal window and removing 'keydown' event listener
