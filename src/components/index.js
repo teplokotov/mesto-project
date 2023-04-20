@@ -83,6 +83,23 @@ function drawCards(cards) {
   });
 };
 
+// Displaying loading text
+function renderSaving(isSaving, btn) {
+  if (isSaving) {
+    if (!btn.classList.contains('btn-create')) {
+      btn.textContent = 'Сохранение...';
+    } else {
+      btn.textContent = 'Создание...';
+    }
+  } else {
+    if (!btn.classList.contains('btn-create')) {
+      btn.textContent = 'Сохранить';
+    } else {
+      btn.textContent = 'Создать';
+    }
+  }
+}
+
 function handleClickBtnEdit(evt) {
   inputUserName.value = userName.textContent;
   inputUserStatus.value = userStatus.textContent;
@@ -92,12 +109,14 @@ function handleClickBtnEdit(evt) {
 
 function handleSubmitFormProfile(evt) {
   evt.preventDefault();
+  renderSaving(true, evt.target.querySelector('.form__button'));
   setUserData(inputUserName.value, inputUserStatus.value)
     .then(() => {
         userName.textContent = inputUserName.value;
         userStatus.textContent = inputUserStatus.value;
     })
-    .catch(err => console.log(err));
+    .catch(err => console.log(err))
+    .finally(() => renderSaving(false, evt.target.querySelector('.form__button')));
   hideClosestPopup(evt);
 }
 
