@@ -14,6 +14,7 @@ export const figureCaption = figure.querySelector('.figure__caption');
 export const popupShowPhoto = document.querySelector('#popupShowPhoto');
 export const userName = document.querySelector('.info__name');
 export const userStatus = document.querySelector('.info__status');
+export const userPhoto = document.querySelector('.profile__avatar');
 export const inputUserName = document.querySelector('#profileName');
 export const inputUserStatus = document.querySelector('#profileStatus');
 export const popupEdit = document.querySelector('#popupEdit');

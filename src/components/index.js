@@ -13,6 +13,7 @@ import {  formProfile,
           btnSaveProfile,
           userName,
           userStatus,
+          userPhoto,
           inputUserName,
           inputUserStatus,
           btnSaveCard,
@@ -29,6 +30,24 @@ import {  setEventListenersOnPopups,
           openPopup,
           hideClosestPopup
         } from '../components/modal.js';
+import { getUserData, setUserData, getInitialCards } from '../components/api.js'
+
+// Initial drawing cards
+getInitialCards()
+  .then(result => drawCards(result))
+  .catch(err => console.log(err));
+
+// Get user data from server and update information on page
+getUserData()
+  .then(result => drawUser(result))
+  .catch(err => console.log(err));
+
+// Insert profile information to the page
+function drawUser(data) {
+  userName.textContent = data.name;
+  userStatus.textContent = data.about;
+  userPhoto.setAttribute('src', data.avatar);
+}
 
 // Open modal window (Edit profile)
 btnEdit.addEventListener('click', handleClickBtnEdit);
@@ -43,7 +62,7 @@ formNewElement.addEventListener('submit', handleSubmitFormNewElement);
 setEventListenersOnPopups();
 
 // Initial drawing cards
-drawCards(elements);
+//drawCards(elements);
 
 // Open modal window (Add new card)
 btnAdd.addEventListener('click', handleClickBtnAdd);
@@ -73,8 +92,12 @@ function handleClickBtnEdit(evt) {
 
 function handleSubmitFormProfile(evt) {
   evt.preventDefault();
-  userName.textContent = inputUserName.value;
-  userStatus.textContent = inputUserStatus.value;
+  setUserData(inputUserName.value, inputUserStatus.value)
+    .then(() => {
+        userName.textContent = inputUserName.value;
+        userStatus.textContent = inputUserStatus.value;
+    })
+    .catch(err => console.log(err));
   hideClosestPopup(evt);
 }
 
