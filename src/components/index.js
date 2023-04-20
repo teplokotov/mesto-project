@@ -30,7 +30,11 @@ import {  setEventListenersOnPopups,
           openPopup,
           hideClosestPopup
         } from '../components/modal.js';
-import { getUserData, setUserData, getInitialCards } from '../components/api.js'
+import {  getUserData,
+          setUserData,
+          getInitialCards,
+          setPhoto
+        } from '../components/api.js'
 
 // Initial drawing cards
 getInitialCards()
@@ -111,9 +115,9 @@ function handleSubmitFormProfile(evt) {
   evt.preventDefault();
   renderSaving(true, evt.target.querySelector('.form__button'));
   setUserData(inputUserName.value, inputUserStatus.value)
-    .then(() => {
-        userName.textContent = inputUserName.value;
-        userStatus.textContent = inputUserStatus.value;
+    .then(res => {
+        userName.textContent = res.name;
+        userStatus.textContent = res.about;
     })
     .catch(err => console.log(err))
     .finally(() => renderSaving(false, evt.target.querySelector('.form__button')));
@@ -129,7 +133,11 @@ function handleClickBtnAdd() {
 
 function handleSubmitFormNewElement(evt) {
   evt.preventDefault();
-  addCard(elementName.value, elementLink.value);
+  renderSaving(true, evt.target.querySelector('.form__button'));
+  setPhoto(elementName.value, elementLink.value)
+    .then(res => addCard(res.name, res.link))
+    .catch(err => console.log(err))
+    .finally(() => renderSaving(false, evt.target.querySelector('.form__button')));
   evt.target.reset();
   hideClosestPopup(evt);
 }

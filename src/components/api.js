@@ -29,7 +29,19 @@ export function setUserData(name, status) {
     body: JSON.stringify({'name': name, 'about': status})
   })
   .then(res => {
-    if (res.ok) return true;
+    if (res.ok) return res.json();
+    return Promise.reject(`Ошибка: ${res.status}`);
+  });
+}
+
+export function setPhoto(name, link) {
+  return fetch(`${config.baseUrl}/cards`, {
+    method: 'POST',
+    headers: config.headers,
+    body: JSON.stringify({'name': name, 'link': link})
+  })
+  .then(res => {
+    if (res.ok) return res.json();
     return Promise.reject(`Ошибка: ${res.status}`);
   });
 }
