@@ -58,3 +58,14 @@ export function deleteCard(card_id) {
     if (!res.ok) return Promise.reject(`Ошибка: ${res.status}`);
   });
 }
+
+export function toggleLike(card_id, action) {
+  return fetch(`${config.baseUrl}/cards/likes/${card_id}`, {
+    method: action,
+    headers: config.headers
+  })
+  .then(res => {
+    if (res.ok) return res.json();
+    return Promise.reject(`Ошибка: ${res.status}`);
+  });
+}

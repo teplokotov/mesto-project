@@ -4,7 +4,7 @@ import {  cardTemplateElement,
           figureCaption,
           popupShowPhoto
        } from './utils.js';
-import {  deleteCard } from '../components/api.js'
+import {  deleteCard, toggleLike } from '../components/api.js'
 
 // Creating card
 export function createCard(name, link, likes, owner_id, user_id, card_id) {
@@ -12,17 +12,28 @@ export function createCard(name, link, likes, owner_id, user_id, card_id) {
   const cardElementImage = cardElement.querySelector('.element__image');
   const cardElementTitle = cardElement.querySelector('.element__title');
   const cardElementCounter = cardElement.querySelector('.counter');
+  const btnLike = cardElement.querySelector('.btn-like');
+  const btnTrash = cardElement.querySelector('.btn-trash');
   cardElementImage.setAttribute('alt', name);
   cardElementImage.setAttribute('src', link);
   cardElementTitle.textContent = name;
-  if(likes.length !== 0) cardElementCounter.textContent = likes.length;
+  // Show likes counter and toggle initial state of like
+  if(likes.length !== 0) {
+    cardElementCounter.textContent = likes.length;
+    const isLiked = likes.find(like => like._id === user_id ? true : false);
+    if (isLiked) btnLike.classList.toggle('btn-like_liked');
+  }
   // Allow to make like
-  const btnLike = cardElement.querySelector('.btn-like');
   btnLike.addEventListener('click', function () {
+    let action = btnLike.classList.contains('btn-like_liked') ? 'DELETE' : 'PUT';
+    // Toggle 'like' button before get response for better UX
     btnLike.classList.toggle('btn-like_liked');
+    // Change counter after get response
+    toggleLike(card_id, action)
+      .then(res => cardElementCounter.textContent = res.likes.length)
+      .catch(err => console.log(err));
   });
   // Allow to delete card
-  const btnTrash = cardElement.querySelector('.btn-trash');
   if (user_id !== owner_id) {
     btnTrash.remove();
   } else {
