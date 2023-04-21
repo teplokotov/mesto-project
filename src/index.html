@@ -12,7 +12,9 @@
     </header>
     <main class="main">
       <section class="profile">
-        <img class="profile__avatar" src="<%=require('./images/kusto.jpg')%>" alt="Фото профиля">
+        <div class="profile__avatar">
+          <img class="avatar" src="<%=require('./images/user.svg')%>" alt="">
+        </div>
         <div class="info profile__info">
           <h1 class="info__name"></h1>
           <button class="btn-edit info__btn-edit" type="button"></button>
@@ -47,6 +49,33 @@
             data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы."
             required>
           <span class="form__input-error profileStatus-error"></span>
+          <button class="btn-save form__button" type="submit">Сохранить</button>
+        </fieldset>
+      </form>
+      <button class="btn-close popup__btn-close" type="button"></button>
+    </div>
+  </div>
+  <div id="popupAvatar" class="popup">
+    <div class="popup__container popup__container_form">
+      <form class="form" name="formEditAvatar" novalidate>
+        <h3 class="form__title">Обновить аватар</h3>
+        <fieldset class="form__fieldset">
+          <input class="form__input" type="url" name="avatarLink" id="avatarLink" placeholder="Ссылка на картинку"
+          pattern="^https?:\/\/(.+?)\/(([a-zA-Z0-9_ \-%\.]*)\.(jpg|png|jpeg|gif))$"
+          data-error-message="Введите адрес сайта."
+          required>
+          <span class="form__input-error avatarLink-error"></span>
+          <button class="btn-save form__button" type="submit">Сохранить</button>
+        </fieldset>
+      </form>
+      <button class="btn-close popup__btn-close" type="button"></button>
+    </div>
+  </div>
+  <div id="popupConsent" class="popup">
+    <div class="popup__container popup__container_form">
+      <form class="form" name="formConsent" novalidate>
+        <h3 class="form__title">Вы уверены?</h3>
+        <fieldset class="form__fieldset">
           <button class="btn-save form__button" type="submit">Сохранить</button>
         </fieldset>
       </form>

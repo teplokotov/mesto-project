@@ -21,6 +21,7 @@
 /* Profile section */
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/avatar/avatar.css);
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/info/info.css);
 @import url(../blocks/info/__name/info__name.css);

@@ -18,7 +18,11 @@ import {  formProfile,
           inputUserStatus,
           btnSaveCard,
           elementName,
-          elementLink
+          elementLink,
+          btnEditAvatar,
+          btnSaveAvatar,
+          inputAvatarLink,
+          formAvatar
         } from '../components/utils.js';
 import {  settings,
           resetFormError,
@@ -33,7 +37,8 @@ import {  setEventListenersOnPopups,
 import {  getUserData,
           setUserData,
           getInitialCards,
-          setPhoto
+          setPhoto,
+          setAvatar
         } from '../components/api.js'
 
 // Get user data from server and update information on page
@@ -55,6 +60,7 @@ function drawUser(data) {
   userName.textContent = data.name;
   userStatus.textContent = data.about;
   userPhoto.setAttribute('src', data.avatar);
+  userPhoto.setAttribute('alt', data.name);
 }
 
 // Open modal window (Edit profile)
@@ -66,14 +72,17 @@ formProfile.addEventListener('submit', handleSubmitFormProfile);
 // Add new card and close modal window
 formNewElement.addEventListener('submit', handleSubmitFormNewElement);
 
+// Add avatar and close modal window
+formAvatar.addEventListener('submit', handleSubmitFormAvatar);
+
 // Allow to close each modal windows if click on overlay
 setEventListenersOnPopups();
 
-// Initial drawing cards
-//drawCards(elements);
-
 // Open modal window (Add new card)
 btnAdd.addEventListener('click', handleClickBtnAdd);
+
+// Open modal window (Change avatar)
+btnEditAvatar.addEventListener('click', handleClickBtnEditAvatar);
 
 // Enabling validation of all forms
 enableValidation(settings);
@@ -140,6 +149,24 @@ function handleSubmitFormNewElement(evt) {
   renderSaving(true, evt.target.querySelector('.form__button'));
   setPhoto(elementName.value, elementLink.value)
     .then(res => addCard(res.name, res.link, res.likes))
+    .catch(err => console.log(err))
+    .finally(() => renderSaving(false, evt.target.querySelector('.form__button')));
+  evt.target.reset();
+  hideClosestPopup(evt);
+}
+
+function handleClickBtnEditAvatar() {
+  formAvatar.reset();
+  resetFormError(popupAvatar, [inputAvatarLink], btnSaveAvatar, settings);
+  window.addEventListener('keydown', closePopupByEscape);
+  openPopup(popupAvatar);
+}
+
+function handleSubmitFormAvatar(evt) {
+  evt.preventDefault();
+  renderSaving(true, evt.target.querySelector('.form__button'));
+  setAvatar(inputAvatarLink.value)
+    .then(res => userPhoto.setAttribute('src', res.avatar))
     .catch(err => console.log(err))
     .finally(() => renderSaving(false, evt.target.querySelector('.form__button')));
   evt.target.reset();

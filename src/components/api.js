@@ -69,3 +69,15 @@ export function toggleLike(card_id, action) {
     return Promise.reject(`Ошибка: ${res.status}`);
   });
 }
+
+export function setAvatar(link) {
+  return fetch(`${config.baseUrl}/users/me/avatar`, {
+    method: 'PATCH',
+    headers: config.headers,
+    body: JSON.stringify({'avatar': link})
+  })
+  .then(res => {
+    if (res.ok) return res.json();
+    return Promise.reject(`Ошибка: ${res.status}`);
+  });
+}

@@ -1,4 +1,5 @@
-import {  popupEdit,
+import {  popupAvatar,
+          popupEdit,
           popupNewElement,
           popupShowPhoto
        } from './utils.js';
@@ -30,7 +31,7 @@ export function hideClosestPopup(evt) {
 
 // Allow to close each modal windows if click on overlay
 export function setEventListenersOnPopups() {
-  [popupEdit, popupNewElement, popupShowPhoto].forEach(function (popup) {
+  [popupEdit, popupNewElement, popupShowPhoto, popupAvatar].forEach(function (popup) {
     popup.addEventListener('click', function (evt) {
       if (!evt.target.className.includes('form') &&
           !evt.target.className.includes('figure') ||
