@@ -1,8 +1,9 @@
-import {  openPopup  } from './modal.js';
+import {  openPopup, closePopupByEscape, hideClosestPopup  } from './modal.js';
 import {  cardTemplateElement,
           figureImage,
           figureCaption,
-          popupShowPhoto
+          popupShowPhoto,
+          formConsent
        } from './utils.js';
 import {  deleteCard, toggleLike } from '../components/api.js'
 
@@ -38,9 +39,18 @@ export function createCard(name, link, likes, owner_id, user_id, card_id) {
     btnTrash.remove();
   } else {
     btnTrash.addEventListener('click', function (evt) {
-      deleteCard(card_id)
-        .then(() => evt.target.closest('.element').remove())
-        .catch(err => console.log(err));
+      window.addEventListener('keydown', closePopupByEscape);
+      openPopup(popupConsent);
+      //Accept to delete card
+      const closestElement = evt.target.closest('.element');
+      formConsent.addEventListener('submit', function findAndRemoveCard(evt) {
+        evt.preventDefault();
+        deleteCard(card_id)
+          .then(() => closestElement.remove())
+          .catch(err => console.log(err));
+        hideClosestPopup(evt);
+        formConsent.removeEventListener('submit', findAndRemoveCard);
+      });
     });
   }
   // Open popup with photo

@@ -1,9 +1,6 @@
 // Styles
 import '../pages/index.css';
 
-// Initial cards
-import elements from '../blocks/elements/elements.js';
-
 // Modules
 import {  formProfile,
           formNewElement,
@@ -30,7 +27,6 @@ import {  settings,
         } from '../components/validate.js';
 import {  createCard } from '../components/card.js';
 import {  setEventListenersOnPopups,
-          closePopupByEscape,
           openPopup,
           hideClosestPopup
         } from '../components/modal.js';
@@ -140,7 +136,6 @@ function handleSubmitFormProfile(evt) {
 function handleClickBtnAdd() {
   formNewElement.reset();
   resetFormError(popupNewElement, [elementName, elementLink], btnSaveCard, settings);
-  window.addEventListener('keydown', closePopupByEscape);
   openPopup(popupNewElement);
 }
 
@@ -148,7 +143,7 @@ function handleSubmitFormNewElement(evt) {
   evt.preventDefault();
   renderSaving(true, evt.target.querySelector('.form__button'));
   setPhoto(elementName.value, elementLink.value)
-    .then(res => addCard(res.name, res.link, res.likes))
+    .then(res => addCard(res.name, res.link, res.likes, null, null, res._id))
     .catch(err => console.log(err))
     .finally(() => renderSaving(false, evt.target.querySelector('.form__button')));
   evt.target.reset();
@@ -158,7 +153,6 @@ function handleSubmitFormNewElement(evt) {
 function handleClickBtnEditAvatar() {
   formAvatar.reset();
   resetFormError(popupAvatar, [inputAvatarLink], btnSaveAvatar, settings);
-  window.addEventListener('keydown', closePopupByEscape);
   openPopup(popupAvatar);
 }
 

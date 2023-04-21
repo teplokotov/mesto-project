@@ -3,6 +3,7 @@ import { settings } from '../components/validate.js';
 export const formProfile = document.forms["formEdit"];
 export const formAvatar = document.forms["formEditAvatar"];
 export const formNewElement = document.forms["formNewElement"];
+export const formConsent = document.forms["formConsent"];
 export const btnSaveProfile = formProfile.querySelector(settings.submitButtonSelector);
 export const btnSaveAvatar = formAvatar.querySelector(settings.submitButtonSelector);
 export const btnEdit = document.querySelector('.btn-edit');
@@ -27,3 +28,4 @@ export const btnSaveCard = popupNewElement.querySelector(settings.submitButtonSe
 export const elementName = document.querySelector('#elementName');
 export const elementLink = document.querySelector('#elementLink');
 export const popupAvatar = document.querySelector('#popupAvatar');
+export const popupConsent = document.querySelector('#popupConsent');

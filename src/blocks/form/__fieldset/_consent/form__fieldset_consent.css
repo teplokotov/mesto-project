@@ -1,0 +1,9 @@
+.form__fieldset_consent {
+  padding: 32px 0 0;
+}
+
+@media (max-width: 879px) {
+  .form__fieldset_consent {
+    padding: 59px 0 0 0;
+  }
+}
