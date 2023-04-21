@@ -6,7 +6,7 @@
 ### Описание
 - Отправлен на проверку 22.04.2023 / дедлайн 07.05.2023
 - Задание: [Ссылка](https://practicum.yandex.ru/learn/web-plus/courses/467b7164-c86d-4b1f-a89f-52f063a355b4/sprints/37301/topics/11997b4c-d767-4cac-b899-d9ed1fe9c7c6/lessons/e5eb95dc-3d56-438d-abac-48bec4441998/)
-- Чеклист по самопроверке №8: [Ссылка](https://code.s3.yandex.net/web-developer/checklists-pdf/web-plus/checklist-9.pdf)
+- Чеклист по самопроверке №9: [Ссылка](https://code.s3.yandex.net/web-developer/checklists-pdf/web-plus/checklist-9.pdf)
 ## Этап 3: Валидация форм и инфраструктура
 ### Описание
 - Отправлен на проверку 19.04.2023 / дедлайн 07.05.2023
