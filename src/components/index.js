@@ -79,15 +79,15 @@ btnAdd.addEventListener('click', handleClickBtnAdd);
 enableValidation(settings);
 
 // Adding card to list
-function addCard(name, link, likes, owner_id, user_id, place) {
-  const cardElement = createCard(name, link, likes, owner_id, user_id);
+function addCard(name, link, likes, owner_id, user_id, card_id, place) {
+  const cardElement = createCard(name, link, likes, owner_id, user_id, card_id);
   place === 'append' ? cardsContainer.append(cardElement) : cardsContainer.prepend(cardElement);
 };
 
 // Drawing cards
 function drawCards(cards, user_id) {
   cards.forEach((item) => {
-    addCard(item.name, item.link, item.likes, item.owner._id, user_id, 'append');
+    addCard(item.name, item.link, item.likes, item.owner._id, user_id, item._id, 'append');
   });
 };
 

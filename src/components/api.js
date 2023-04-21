@@ -48,3 +48,13 @@ export function setPhoto(name, link) {
     return res.owner._id ? res : Promise.reject('Ошибка: Не найден ID пользователя');
   })
 }
+
+export function deleteCard(card_id) {
+  return fetch(`${config.baseUrl}/cards/${card_id}`, {
+    method: 'DELETE',
+    headers: config.headers
+  })
+  .then(res => {
+    if (!res.ok) return Promise.reject(`Ошибка: ${res.status}`);
+  });
+}

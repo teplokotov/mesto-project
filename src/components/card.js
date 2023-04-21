@@ -4,10 +4,10 @@ import {  cardTemplateElement,
           figureCaption,
           popupShowPhoto
        } from './utils.js';
-import {  getUserData } from '../components/api.js'
+import {  deleteCard } from '../components/api.js'
 
 // Creating card
-export function createCard(name, link, likes, owner_id, user_id) {
+export function createCard(name, link, likes, owner_id, user_id, card_id) {
   const cardElement = cardTemplateElement.cloneNode(true);
   const cardElementImage = cardElement.querySelector('.element__image');
   const cardElementTitle = cardElement.querySelector('.element__title');
@@ -27,7 +27,9 @@ export function createCard(name, link, likes, owner_id, user_id) {
     btnTrash.remove();
   } else {
     btnTrash.addEventListener('click', function (evt) {
-      evt.target.closest('.element').remove();
+      deleteCard(card_id)
+        .then(() => evt.target.closest('.element').remove())
+        .catch(err => console.log(err));
     });
   }
   // Open popup with photo
