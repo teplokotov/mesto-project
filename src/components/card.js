@@ -1,28 +1,35 @@
-import {  closePopupByEscape, openPopup  } from './modal.js';
+import {  openPopup  } from './modal.js';
 import {  cardTemplateElement,
           figureImage,
           figureCaption,
           popupShowPhoto
        } from './utils.js';
+import {  getUserData } from '../components/api.js'
 
 // Creating card
-export function createCard(name, link) {
+export function createCard(name, link, likes, owner_id, user_id) {
   const cardElement = cardTemplateElement.cloneNode(true);
   const cardElementImage = cardElement.querySelector('.element__image');
   const cardElementTitle = cardElement.querySelector('.element__title');
+  const cardElementCounter = cardElement.querySelector('.counter');
   cardElementImage.setAttribute('alt', name);
   cardElementImage.setAttribute('src', link);
   cardElementTitle.textContent = name;
-  // Make like/unlike
+  if(likes.length !== 0) cardElementCounter.textContent = likes.length;
+  // Allow to make like
   const btnLike = cardElement.querySelector('.btn-like');
   btnLike.addEventListener('click', function () {
     btnLike.classList.toggle('btn-like_liked');
   });
-  // Delete card
+  // Allow to delete card
   const btnTrash = cardElement.querySelector('.btn-trash');
-  btnTrash.addEventListener('click', function (evt) {
-    evt.target.closest('.element').remove();
-  });
+  if (user_id !== owner_id) {
+    btnTrash.remove();
+  } else {
+    btnTrash.addEventListener('click', function (evt) {
+      evt.target.closest('.element').remove();
+    });
+  }
   // Open popup with photo
   cardElementImage.addEventListener('click', function (evt) {
     figureImage.setAttribute('alt', name);

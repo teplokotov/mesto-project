@@ -41,6 +41,7 @@
 @import url(../blocks/btn-like/_liked/btn-like_liked.css);
 @import url(../blocks/element/__trash/element__trash.css);
 @import url(../blocks/btn-trash/btn-trash.css);
+@import url(../blocks/counter/counter.css);
 
 /* Footer */
 @import url(../blocks/footer/footer.css);

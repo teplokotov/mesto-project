@@ -43,5 +43,8 @@ export function setPhoto(name, link) {
   .then(res => {
     if (res.ok) return res.json();
     return Promise.reject(`Ошибка: ${res.status}`);
-  });
+  })
+  .then(res => {
+    return res.owner._id ? res : Promise.reject('Ошибка: Не найден ID пользователя');
+  })
 }

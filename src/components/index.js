@@ -36,14 +36,18 @@ import {  getUserData,
           setPhoto
         } from '../components/api.js'
 
-// Initial drawing cards
-getInitialCards()
-  .then(result => drawCards(result))
-  .catch(err => console.log(err));
-
 // Get user data from server and update information on page
 getUserData()
-  .then(result => drawUser(result))
+  .then(result => {
+    // Draw profile information
+    drawUser(result);
+    // Get user id
+    const user_id = result._id;
+    // Initial drawing cards
+    getInitialCards()
+      .then(result => drawCards(result, user_id))
+      .catch(err => console.log(err));
+  })
   .catch(err => console.log(err));
 
 // Insert profile information to the page
@@ -75,15 +79,15 @@ btnAdd.addEventListener('click', handleClickBtnAdd);
 enableValidation(settings);
 
 // Adding card to list
-function addCard(name, link, place) {
-  const cardElement = createCard(name, link);
+function addCard(name, link, likes, owner_id, user_id, place) {
+  const cardElement = createCard(name, link, likes, owner_id, user_id);
   place === 'append' ? cardsContainer.append(cardElement) : cardsContainer.prepend(cardElement);
 };
 
 // Drawing cards
-function drawCards(cards) {
+function drawCards(cards, user_id) {
   cards.forEach((item) => {
-    addCard(item.name, item.link, 'append');
+    addCard(item.name, item.link, item.likes, item.owner._id, user_id, 'append');
   });
 };
 
@@ -135,7 +139,7 @@ function handleSubmitFormNewElement(evt) {
   evt.preventDefault();
   renderSaving(true, evt.target.querySelector('.form__button'));
   setPhoto(elementName.value, elementLink.value)
-    .then(res => addCard(res.name, res.link))
+    .then(res => addCard(res.name, res.link, res.likes))
     .catch(err => console.log(err))
     .finally(() => renderSaving(false, evt.target.querySelector('.form__button')));
   evt.target.reset();
