@@ -27,11 +27,12 @@ export function createCard(name, link, likes, owner_id, user_id, card_id) {
   // Allow to make like
   btnLike.addEventListener('click', function () {
     let action = btnLike.classList.contains('btn-like_liked') ? 'DELETE' : 'PUT';
-    // Toggle 'like' button before get response for better UX
-    btnLike.classList.toggle('btn-like_liked');
-    // Change counter after get response
+    // Change counter and toggle 'like' button after get response
     toggleLike(card_id, action)
-      .then(res => cardElementCounter.textContent = res.likes.length)
+      .then(res => {
+        cardElementCounter.textContent = res.likes.length > 0 ? res.likes.length : '';
+        btnLike.classList.toggle('btn-like_liked');
+      })
       .catch(err => console.log(err));
   });
   // Allow to delete card
@@ -39,7 +40,6 @@ export function createCard(name, link, likes, owner_id, user_id, card_id) {
     btnTrash.remove();
   } else {
     btnTrash.addEventListener('click', function (evt) {
-      window.addEventListener('keydown', closePopupByEscape);
       openPopup(popupConsent);
       // Create function for delete card after consent
       setAction('findAndRemoveCard', () => {
