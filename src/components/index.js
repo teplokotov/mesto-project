@@ -39,17 +39,29 @@ import {  getUserData,
           setAvatar
         } from '../components/api.js'
 
+// // Get user data from server and update information on page
+// getUserData()
+//   .then(result => {
+//     // Draw profile information
+//     drawUser(result);
+//     // Get user id
+//     const user_id = result._id;
+//     // Initial drawing cards
+//     getInitialCards()
+//       .then(result => drawCards(result, user_id))
+//       .catch(err => console.log(err));
+//   })
+//   .catch(err => console.log(err));
+
 // Get user data from server and update information on page
-getUserData()
-  .then(result => {
+Promise.all([getUserData(), getInitialCards()])
+  .then(([userData, cards]) => {
     // Draw profile information
-    drawUser(result);
+    drawUser(userData);
     // Get user id
-    const user_id = result._id;
+    const user_id = userData._id;
     // Initial drawing cards
-    getInitialCards()
-      .then(result => drawCards(result, user_id))
-      .catch(err => console.log(err));
+    drawCards(cards, user_id)
   })
   .catch(err => console.log(err));
 
