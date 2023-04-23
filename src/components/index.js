@@ -39,20 +39,6 @@ import {  getUserData,
           setAvatar
         } from '../components/api.js'
 
-// // Get user data from server and update information on page
-// getUserData()
-//   .then(result => {
-//     // Draw profile information
-//     drawUser(result);
-//     // Get user id
-//     const user_id = result._id;
-//     // Initial drawing cards
-//     getInitialCards()
-//       .then(result => drawCards(result, user_id))
-//       .catch(err => console.log(err));
-//   })
-//   .catch(err => console.log(err));
-
 // Get user data from server and update information on page
 Promise.all([getUserData(), getInitialCards()])
   .then(([userData, cards]) => {
@@ -139,14 +125,14 @@ function handleClickBtnEdit(evt) {
 
 function handleSubmitFormProfile(evt) {
   evt.preventDefault();
-  renderSaving(true, evt.target.querySelector('.form__button'));
+  renderSaving(true, evt.submitter);
   setUserData(inputUserName.value, inputUserStatus.value)
     .then(res => {
         userName.textContent = res.name;
         userStatus.textContent = res.about;
     })
     .catch(err => console.log(err))
-    .finally(() => renderSaving(false, evt.target.querySelector('.form__button')));
+    .finally(() => renderSaving(false, evt.submitter));
   hideClosestPopup(evt);
 }
 
@@ -158,11 +144,11 @@ function handleClickBtnAdd() {
 
 function handleSubmitFormNewElement(evt) {
   evt.preventDefault();
-  renderSaving(true, evt.target.querySelector('.form__button'));
+  renderSaving(true, evt.submitter);
   setPhoto(elementName.value, elementLink.value)
     .then(res => addCard(res.name, res.link, res.likes, null, null, res._id))
     .catch(err => console.log(err))
-    .finally(() => renderSaving(false, evt.target.querySelector('.form__button')));
+    .finally(() => renderSaving(false, evt.submitter));
   evt.target.reset();
   hideClosestPopup(evt);
 }
@@ -175,11 +161,11 @@ function handleClickBtnEditAvatar() {
 
 function handleSubmitFormAvatar(evt) {
   evt.preventDefault();
-  renderSaving(true, evt.target.querySelector('.form__button'));
+  renderSaving(true, evt.submitter);
   setAvatar(inputAvatarLink.value)
     .then(res => userPhoto.setAttribute('src', res.avatar))
     .catch(err => console.log(err))
-    .finally(() => renderSaving(false, evt.target.querySelector('.form__button')));
+    .finally(() => renderSaving(false, evt.submitter));
   evt.target.reset();
   hideClosestPopup(evt);
 }
