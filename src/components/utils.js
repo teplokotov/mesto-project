@@ -29,3 +29,8 @@ export const elementName = document.querySelector('#elementName');
 export const elementLink = document.querySelector('#elementLink');
 export const popupAvatar = document.querySelector('#popupAvatar');
 export const popupConsent = document.querySelector('#popupConsent');
+export const actions = {};
+
+export function setAction(name, func) {
+  actions[name] = func;
+}

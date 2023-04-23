@@ -4,6 +4,7 @@ import '../pages/index.css';
 // Modules
 import {  formProfile,
           formNewElement,
+          formConsent,
           btnEdit,
           btnAdd,
           cardsContainer,
@@ -19,13 +20,14 @@ import {  formProfile,
           btnEditAvatar,
           btnSaveAvatar,
           inputAvatarLink,
-          formAvatar
+          formAvatar,
+          actions
         } from '../components/utils.js';
 import {  settings,
           resetFormError,
           enableValidation
         } from '../components/validate.js';
-import {  createCard } from '../components/card.js';
+import {  createCard  } from '../components/card.js';
 import {  setEventListenersOnPopups,
           openPopup,
           hideClosestPopup
@@ -70,6 +72,9 @@ formNewElement.addEventListener('submit', handleSubmitFormNewElement);
 
 // Add avatar and close modal window
 formAvatar.addEventListener('submit', handleSubmitFormAvatar);
+
+// Delete card after consent and close modal window
+formConsent.addEventListener('submit', handleSubmitFormConsent);
 
 // Allow to close each modal windows if click on overlay
 setEventListenersOnPopups();
@@ -165,4 +170,9 @@ function handleSubmitFormAvatar(evt) {
     .finally(() => renderSaving(false, evt.target.querySelector('.form__button')));
   evt.target.reset();
   hideClosestPopup(evt);
+}
+
+function handleSubmitFormConsent(evt) {
+  evt.preventDefault();
+  actions.findAndRemoveCard();
 }

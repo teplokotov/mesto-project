@@ -1,9 +1,9 @@
-import {  openPopup, closePopupByEscape, hideClosestPopup  } from './modal.js';
+import {  openPopup, closePopupByEscape, closePopup  } from './modal.js';
 import {  cardTemplateElement,
           figureImage,
           figureCaption,
           popupShowPhoto,
-          formConsent
+          setAction
        } from './utils.js';
 import {  deleteCard, toggleLike } from '../components/api.js'
 
@@ -41,15 +41,12 @@ export function createCard(name, link, likes, owner_id, user_id, card_id) {
     btnTrash.addEventListener('click', function (evt) {
       window.addEventListener('keydown', closePopupByEscape);
       openPopup(popupConsent);
-      //Accept to delete card
-      const closestElement = evt.target.closest('.element');
-      formConsent.addEventListener('submit', function findAndRemoveCard(evt) {
-        evt.preventDefault();
+      // Create function for delete card after consent
+      setAction('findAndRemoveCard', () => {
         deleteCard(card_id)
-          .then(() => closestElement.remove())
+          .then(() => evt.target.closest('.element').remove())
           .catch(err => console.log(err));
-        hideClosestPopup(evt);
-        formConsent.removeEventListener('submit', findAndRemoveCard);
+        closePopup(popupConsent);
       });
     });
   }
