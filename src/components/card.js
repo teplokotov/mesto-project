@@ -44,9 +44,11 @@ export function createCard(name, link, likes, owner_id, user_id, card_id) {
       // Create function for delete card after consent
       setAction('findAndRemoveCard', () => {
         deleteCard(card_id)
-          .then(() => evt.target.closest('.element').remove())
+          .then(() => {
+            evt.target.closest('.element').remove();
+            closePopup(popupConsent);
+          })
           .catch(err => console.log(err));
-        closePopup(popupConsent);
       });
     });
   }

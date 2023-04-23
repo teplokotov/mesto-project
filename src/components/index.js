@@ -130,10 +130,10 @@ function handleSubmitFormProfile(evt) {
     .then(res => {
         userName.textContent = res.name;
         userStatus.textContent = res.about;
+        hideClosestPopup(evt);
     })
     .catch(err => console.log(err))
     .finally(() => renderSaving(false, evt.submitter));
-  hideClosestPopup(evt);
 }
 
 function handleClickBtnAdd() {
@@ -146,11 +146,12 @@ function handleSubmitFormNewElement(evt) {
   evt.preventDefault();
   renderSaving(true, evt.submitter);
   setPhoto(elementName.value, elementLink.value)
-    .then(res => addCard(res.name, res.link, res.likes, null, null, res._id))
+    .then(res => {
+      addCard(res.name, res.link, res.likes, null, null, res._id);
+      hideClosestPopup(evt);
+    })
     .catch(err => console.log(err))
     .finally(() => renderSaving(false, evt.submitter));
-  evt.target.reset();
-  hideClosestPopup(evt);
 }
 
 function handleClickBtnEditAvatar() {
@@ -163,11 +164,12 @@ function handleSubmitFormAvatar(evt) {
   evt.preventDefault();
   renderSaving(true, evt.submitter);
   setAvatar(inputAvatarLink.value)
-    .then(res => userPhoto.setAttribute('src', res.avatar))
+    .then(res => {
+      userPhoto.setAttribute('src', res.avatar);
+      hideClosestPopup(evt);
+    })
     .catch(err => console.log(err))
     .finally(() => renderSaving(false, evt.submitter));
-  evt.target.reset();
-  hideClosestPopup(evt);
 }
 
 function handleSubmitFormConsent(evt) {

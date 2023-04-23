@@ -1,3 +1,5 @@
+import {  request  } from '../components/utils.js';
+
 const config = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-23',
   headers: {
@@ -7,77 +9,50 @@ const config = {
 }
 
 export function getInitialCards() {
-  return fetch(`${config.baseUrl}/cards`, {headers: config.headers})
-    .then(res => {
-      if (res.ok) return res.json();
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+  return request(`${config.baseUrl}/cards`, {headers: config.headers});
 }
 
 export function getUserData() {
-  return fetch(`${config.baseUrl}/users/me`, {headers: config.headers})
-    .then(res => {
-      if (res.ok) return res.json();
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+  return request(`${config.baseUrl}/users/me`, {headers: config.headers});
 }
 
 export function setUserData(name, status) {
-  return fetch(`${config.baseUrl}/users/me`, {
+  return request(`${config.baseUrl}/users/me`, {
     method: 'PATCH',
     headers: config.headers,
     body: JSON.stringify({'name': name, 'about': status})
-  })
-  .then(res => {
-    if (res.ok) return res.json();
-    return Promise.reject(`Ошибка: ${res.status}`);
   });
 }
 
 export function setPhoto(name, link) {
-  return fetch(`${config.baseUrl}/cards`, {
+  return request(`${config.baseUrl}/cards`, {
     method: 'POST',
     headers: config.headers,
     body: JSON.stringify({'name': name, 'link': link})
   })
   .then(res => {
-    if (res.ok) return res.json();
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
-  .then(res => {
     return res.owner._id ? res : Promise.reject('Ошибка: Не найден ID пользователя');
-  })
+  });
 }
 
 export function deleteCard(card_id) {
-  return fetch(`${config.baseUrl}/cards/${card_id}`, {
+  return request(`${config.baseUrl}/cards/${card_id}`, {
     method: 'DELETE',
     headers: config.headers
-  })
-  .then(res => {
-    if (!res.ok) return Promise.reject(`Ошибка: ${res.status}`);
   });
 }
 
 export function toggleLike(card_id, action) {
-  return fetch(`${config.baseUrl}/cards/likes/${card_id}`, {
+  return request(`${config.baseUrl}/cards/likes/${card_id}`, {
     method: action,
     headers: config.headers
-  })
-  .then(res => {
-    if (res.ok) return res.json();
-    return Promise.reject(`Ошибка: ${res.status}`);
   });
 }
 
 export function setAvatar(link) {
-  return fetch(`${config.baseUrl}/users/me/avatar`, {
+  return request(`${config.baseUrl}/users/me/avatar`, {
     method: 'PATCH',
     headers: config.headers,
     body: JSON.stringify({'avatar': link})
-  })
-  .then(res => {
-    if (res.ok) return res.json();
-    return Promise.reject(`Ошибка: ${res.status}`);
   });
 }
