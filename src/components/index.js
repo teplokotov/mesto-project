@@ -2,7 +2,7 @@
 import '../pages/index.css';
 
 // Utils (Constants, Settings...)
-import { config } from '../components/utils.js';
+import { config, setAction } from '../components/utils.js';
 
 // Classes of teplokotov:
 import Api from '../components/Api.js';
@@ -40,10 +40,50 @@ Promise.all([api.getUserData(), api.getInitialCards()])
     const section = new Section({
       items: cards,
       renderer: (data) => {
-        const itemElement = Card.create(data);
+        const itemElement = createCard(data, userData._id);
         section.addItem(itemElement, 'append');
       }
     }, '.elements__list');
-    section.drawItems(); // ToDo: [teplokotov] Check how to transfer userId
+    section.drawItems();
   })
   .catch(err => console.log(err));
+
+function createCard(data, userId) {
+  const card = new Card(data, '#card-template', userId, {
+    handlebtnLikeClick,
+    handlebtnTrashClick,
+    handleImageClick
+  });
+  return card.draw();
+};
+
+function handlebtnLikeClick(btnLike, cardElementCounter, cardId) {
+  let action = btnLike.classList.contains('btn-like_liked') ? 'DELETE' : 'PUT';
+  // Change counter and toggle 'like' button after get response
+  api.toggleLike(cardId, action)
+    .then(res => {
+      cardElementCounter.textContent = res.likes.length > 0 ? res.likes.length : '';
+      btnLike.classList.toggle('btn-like_liked');
+    })
+    .catch(err => console.log(err));
+};
+
+function handlebtnTrashClick(evt) {
+  openPopup(popupConsent);              // ToDo [inkxivv]
+  // Create function for delete card after consent
+  setAction('findAndRemoveCard', () => {
+    api.deleteCard(card_id)
+      .then(() => {
+        evt.target.closest('.element').remove();
+        closePopup(popupConsent);       // ToDo [inkxivv]
+      })
+      .catch(err => console.log(err));
+  });
+};
+
+function handleImageClick(name, link) {
+  figureImage.setAttribute('alt', name); // ToDo [inkxivv]
+  figureImage.setAttribute('src', link); // ToDo [inkxivv]
+  figureCaption.textContent = name;      // ToDo [inkxivv]
+  openPopup(popupShowPhoto);             // ToDo [inkxivv]
+}

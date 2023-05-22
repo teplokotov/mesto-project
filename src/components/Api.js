@@ -48,7 +48,7 @@ export default class Api {
   }
 
   toggleLike(card_id, action) {
-    return this._request(`${config.baseUrl}/cards/likes/${card_id}`, {
+    return this._request(`${this._config.baseUrl}/cards/likes/${card_id}`, {
       method: action,
       headers: this._config.headers
     });
