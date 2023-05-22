@@ -22,22 +22,22 @@ import {  formProfile,
           inputAvatarLink,
           formAvatar,
           actions
-        } from '../components/utils.js';
+        } from '../components/old_utils.js';
 import {  settings,
           resetFormError,
           enableValidation
-        } from '../components/validate.js';
-import {  createCard  } from '../components/card.js';
+        } from '../components/old_validate.js';
+import {  createCard  } from './old_card.js';
 import {  setEventListenersOnPopups,
           openPopup,
           hideClosestPopup
-        } from '../components/modal.js';
+        } from '../components/old_modal.js';
 import {  getUserData,
           setUserData,
           getInitialCards,
           setPhoto,
           setAvatar
-        } from '../components/api.js'
+        } from '../components/old_api.js'
 
 // Get user data from server and update information on page
 Promise.all([getUserData(), getInitialCards()])

@@ -1,4 +1,4 @@
-import {  request  } from '../components/utils.js';
+import {  request  } from '../components/old_utils.js';
 
 const config = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-23',

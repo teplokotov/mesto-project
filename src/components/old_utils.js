@@ -1,4 +1,4 @@
-import { settings } from '../components/validate.js';
+import { settings } from '../components/old_validate.js';
 
 export const formProfile = document.forms["formEdit"];
 export const formAvatar = document.forms["formEditAvatar"];

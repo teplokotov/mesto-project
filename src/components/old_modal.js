@@ -3,7 +3,7 @@ import {  popupAvatar,
           popupNewElement,
           popupShowPhoto,
           popupConsent
-       } from './utils.js';
+       } from '../components/old_utils.js';
 
 // Opening modal window
 export function openPopup(item) {

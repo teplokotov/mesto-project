@@ -1,11 +1,11 @@
-import {  openPopup, closePopupByEscape, closePopup  } from './modal.js';
+import {  openPopup, closePopupByEscape, closePopup  } from '../components/old_modal.js';
 import {  cardTemplateElement,
           figureImage,
           figureCaption,
           popupShowPhoto,
           setAction
-       } from './utils.js';
-import {  deleteCard, toggleLike } from '../components/api.js'
+       } from './old_utils.js';
+import {  deleteCard, toggleLike } from './old_api.js'
 
 // Creating card
 export function createCard(name, link, likes, owner_id, user_id, card_id) {
