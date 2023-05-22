@@ -25,3 +25,13 @@ const api = new Api(config);
 // https://practicum.yandex.ru/learn/web-plus/courses/5fdf60f9-19c5-4c92-acb4-de8a5178d826/sprints/37311/topics/b968bfe5-3f2c-4b4a-a7df-b7f605f3d025/lessons/a81663db-9032-49a7-93d6-6ea73f49b5e7/
 // Чек-лист:
 // https://code.s3.yandex.net/web-developer/checklists-pdf/web-plus/checklist-10.pdf
+
+// Get user data from server and update information on page
+Promise.all([api.getUserData(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+    // Draw profile information
+    // drawUser(userData);  // ToDo: [teplokotov] Replace to UserInfo
+    // Initial drawing cards
+    // drawCards(cards, userData._id) // ToDo: [teplokotov] Replace to Section
+  })
+  .catch(err => console.log(err));
