@@ -37,6 +37,13 @@ Promise.all([api.getUserData(), api.getInitialCards()])
     // Draw profile information
     userInfo.setUserInfo(userData);
     // Initial drawing cards
-    // drawCards(cards, userData._id) // ToDo: [teplokotov] Replace to Section
+    const section = new Section({
+      items: cards,
+      renderer: (data) => {
+        const itemElement = Card.create(data);
+        section.addItem(itemElement, 'append');
+      }
+    }, '.elements__list');
+    section.drawItems(); // ToDo: [teplokotov] Check how to transfer userId
   })
   .catch(err => console.log(err));
