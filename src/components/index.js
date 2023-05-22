@@ -17,6 +17,11 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 
 const api = new Api(config);
+const userInfo = new UserInfo({
+  selectorUserName: '.info__name',
+  selectorUserStatus: '.info__status',
+  selectorUserPhoto: '.avatar'
+});
 
 // [Важно!] (можно свернуть)
 // Все экземпляры классов создаются только в файле index.js
@@ -30,7 +35,7 @@ const api = new Api(config);
 Promise.all([api.getUserData(), api.getInitialCards()])
   .then(([userData, cards]) => {
     // Draw profile information
-    // drawUser(userData);  // ToDo: [teplokotov] Replace to UserInfo
+    userInfo.setUserInfo(userData);
     // Initial drawing cards
     // drawCards(cards, userData._id) // ToDo: [teplokotov] Replace to Section
   })
