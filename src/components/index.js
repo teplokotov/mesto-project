@@ -84,11 +84,11 @@ function handlebtnTrashClick(evt) {
   });
 };
 
+const popupShowPhoto = new PopupWithImage('#popupShowPhoto');
+popupShowPhoto.setEventListeners();
+
 function handleImageClick(name, link) {
-  figureImage.setAttribute('alt', name); // ToDo [inkxivv]
-  figureImage.setAttribute('src', link); // ToDo [inkxivv]
-  figureCaption.textContent = name;      // ToDo [inkxivv]
-  openPopup(popupShowPhoto);             // ToDo [inkxivv]
+  popupShowPhoto.open({name, link});
 }
 
 // Open modal window (Edit profile)
@@ -109,3 +109,5 @@ function handleClickBtnEdit() {
   formProfileValidator.resetFormError();                // ToDo [inkxivv]
   openPopup(popupEdit);                                 // ToDo [inkxivv]
 }
+
+
