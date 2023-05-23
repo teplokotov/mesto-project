@@ -2,7 +2,7 @@
 import '../pages/index.css';
 
 // Utils (Constants, Settings...)
-import { config, setAction } from '../components/utils.js';
+import { config, setAction, btnEdit, btnAdd, settings } from '../components/utils.js';
 
 // Classes of teplokotov:
 import Api from '../components/Api.js';
@@ -22,6 +22,9 @@ const userInfo = new UserInfo({
   selectorUserStatus: '.info__status',
   selectorUserPhoto: '.avatar'
 });
+const newElementValidator = new FormValidator(settings, 'formNewElement');
+const formAvatarValidator = new FormValidator(settings, 'formAvatar');
+const formProfileValidator = new FormValidator(settings, 'formProfile');
 
 // [Важно!] (можно свернуть)
 // Все экземпляры классов создаются только в файле index.js
@@ -86,4 +89,23 @@ function handleImageClick(name, link) {
   figureImage.setAttribute('src', link); // ToDo [inkxivv]
   figureCaption.textContent = name;      // ToDo [inkxivv]
   openPopup(popupShowPhoto);             // ToDo [inkxivv]
+}
+
+// Open modal window (Edit profile)
+btnEdit.addEventListener('click', handleClickBtnEdit);
+
+// Open modal window (Add new card)
+btnAdd.addEventListener('click', handleClickBtnAdd);
+
+function handleClickBtnAdd() {
+  newElementValidator.resetFormFields();  // ToDo [inkxivv]
+  newElementValidator.resetFormErrors();  // ToDo [inkxivv]
+  openPopup(popupNewElement);             // ToDo [inkxivv]
+}
+
+function handleClickBtnEdit() {
+  //inputUserName.value = userName.textContent;         // ToDo [inkxivv] Replace as method of popup class
+  //inputUserStatus.value = userStatus.textContent;     // ToDo [inkxivv] Replace as method of popup class
+  formProfileValidator.resetFormError();                // ToDo [inkxivv]
+  openPopup(popupEdit);                                 // ToDo [inkxivv]
 }
