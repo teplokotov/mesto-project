@@ -21,7 +21,7 @@ export default class Popup {
   }
 
   setEventListeners() {
-    this._popup.addEventListener('click', function (evt) {
+    this._popup.addEventListener('click', (evt) => {
       if (!evt.target.className.includes('form') &&
           !evt.target.className.includes('figure') ||
           evt.target.classList.contains('popup__container')) {
