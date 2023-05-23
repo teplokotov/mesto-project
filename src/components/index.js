@@ -84,18 +84,18 @@ function handlebtnTrashClick(evt) {
   });
 };
 
+// Open modal window (Edit profile)
+btnEdit.addEventListener('click', handleClickBtnEdit);
+
+// Open modal window (Add new card)
+btnAdd.addEventListener('click', handleClickBtnAdd);
+
 const popupShowPhoto = new PopupWithImage('#popupShowPhoto');
 popupShowPhoto.setEventListeners();
 
 function handleImageClick(name, link) {
   popupShowPhoto.open({name, link});
 }
-
-// Open modal window (Edit profile)
-btnEdit.addEventListener('click', handleClickBtnEdit);
-
-// Open modal window (Add new card)
-btnAdd.addEventListener('click', handleClickBtnAdd);
 
 function handleClickBtnAdd() {
   newElementValidator.resetFormFields();  // ToDo [inkxivv]
@@ -109,5 +109,4 @@ function handleClickBtnEdit() {
   formProfileValidator.resetFormError();                // ToDo [inkxivv]
   openPopup(popupEdit);                                 // ToDo [inkxivv]
 }
-
 
