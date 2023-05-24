@@ -45,13 +45,6 @@ export default class FormValidator {
     }
   }
 
-  _resetFormError() {
-    this._inputList.forEach((inputElement) => {
-      this._hideInputError(inputElement);
-    });
-    this._toggleButtonState();
-  }
-
   _setEventListeners() {
     this._inputList = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
     this._btnSave = this._formElement.querySelector(this._settings.submitButtonSelector);
