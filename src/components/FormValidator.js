@@ -1,8 +1,8 @@
 export default class FormValidator {
 
-  constructor(settings) {
+  constructor(settings, formSelector) {
     this._settings = settings;
-    this._formElement = document.querySelector(this._settings.formSelector);
+    this._formElement = document.forms[formSelector];
   }
 
   resetFormError() {
