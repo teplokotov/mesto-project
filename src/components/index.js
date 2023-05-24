@@ -2,7 +2,7 @@
 import '../pages/index.css';
 
 // Utils (Constants, Settings...)
-import { config, setAction, btnEdit, btnAdd, settings } from '../components/utils.js';
+import { config, setAction, btnEdit, btnAdd, btnEditAvatar, settings } from '../components/utils.js';
 
 // Classes of teplokotov:
 import Api from '../components/Api.js';
@@ -71,14 +71,17 @@ function handlebtnLikeClick(btnLike, cardElementCounter, cardId) {
     .catch(err => console.log(err));
 };
 
+const popupConsent = new Popup('#popupConsent');
+popupConsent.setEventListeners();
+
 function handlebtnTrashClick(evt) {
-  openPopup(popupConsent);              // ToDo [inkxivv]
+  popupConsent.open();              // ToDo [inkxivv]
   // Create function for delete card after consent
   setAction('findAndRemoveCard', () => {
     api.deleteCard(card_id)
       .then(() => {
         evt.target.closest('.element').remove();
-        closePopup(popupConsent);       // ToDo [inkxivv]
+        popupConsent.close();       // ToDo [inkxivv]
       })
       .catch(err => console.log(err));
   });
@@ -90,6 +93,9 @@ btnEdit.addEventListener('click', handleClickBtnEdit);
 // Open modal window (Add new card)
 btnAdd.addEventListener('click', handleClickBtnAdd);
 
+// Open modal window (Change avatar)
+btnEditAvatar.addEventListener('click', handleClickBtnEditAvatar);
+
 const popupShowPhoto = new PopupWithImage('#popupShowPhoto');
 popupShowPhoto.setEventListeners();
 
@@ -97,16 +103,31 @@ function handleImageClick(name, link) {
   popupShowPhoto.open({name, link});
 }
 
+const popupNewElement = new PopupWithForm('#popupNewElement');
+popupNewElement.setEventListeners();
+
 function handleClickBtnAdd() {
-  newElementValidator.resetFormFields();  // ToDo [inkxivv]
-  newElementValidator.resetFormErrors();  // ToDo [inkxivv]
-  openPopup(popupNewElement);             // ToDo [inkxivv]
+  popupNewElement.open()
+  // newElementValidator.resetFormFields();  // ToDo [inkxivv]
+  // newElementValidator.resetFormErrors();  // ToDo [inkxivv]
+  // openPopup(popupNewElement);             // ToDo [inkxivv]
 }
 
+const popupEdit = new PopupWithForm('#popupEdit');
+popupEdit.setEventListeners();
+
 function handleClickBtnEdit() {
+  popupEdit.open();
   //inputUserName.value = userName.textContent;         // ToDo [inkxivv] Replace as method of popup class
   //inputUserStatus.value = userStatus.textContent;     // ToDo [inkxivv] Replace as method of popup class
-  formProfileValidator.resetFormError();                // ToDo [inkxivv]
-  openPopup(popupEdit);                                 // ToDo [inkxivv]
+  // formProfileValidator.resetFormError();                // ToDo [inkxivv]
+  // openPopup(popupEdit);                                 // ToDo [inkxivv]
+}
+
+const popupAvatar = new PopupWithForm('#popupAvatar');
+popupAvatar.setEventListeners();
+
+function handleClickBtnEditAvatar() {
+  popupAvatar.open();
 }
 

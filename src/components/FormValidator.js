@@ -5,6 +5,14 @@ export default class FormValidator {
     this._formElement = document.querySelector(this._settings.formSelector);
   }
 
+  resetFormError() {
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement);
+    });
+    this._toggleButtonState();
+  }
+
   _showInputError(inputElement, errorMessage) {
     this._errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(this._settings.inputErrorClass);
