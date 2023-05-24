@@ -3,14 +3,15 @@ export default class FormValidator {
   constructor(settings, formSelector) {
     this._settings = settings;
     this._formElement = document.forms[formSelector];
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
+    this._btnSave = this._formElement.querySelector(this._settings.submitButtonSelector);
   }
 
   resetFormError() {
-    this._inputList = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
     this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
     });
-    this._toggleButtonState();
+    this._toggleButtonState(this._btnSave);
   }
 
   _showInputError(inputElement, errorMessage) {
@@ -54,9 +55,6 @@ export default class FormValidator {
   }
 
   _setEventListeners() {
-    this._inputList = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
-    this._btnSave = this._formElement.querySelector(this._settings.submitButtonSelector);
-
     this._inputList.forEach(inputElement => {
       inputElement.addEventListener('input', () => {
         this._toggleButtonState(this._btnSave);
