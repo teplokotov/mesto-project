@@ -23,8 +23,12 @@ const userInfo = new UserInfo({
   selectorUserPhoto: '.avatar'
 });
 const newElementValidator = new FormValidator(settings, 'formNewElement');
-const formAvatarValidator = new FormValidator(settings, 'formAvatar');
-const formProfileValidator = new FormValidator(settings, 'formProfile');
+const formAvatarValidator = new FormValidator(settings, 'formEditAvatar');
+const formProfileValidator = new FormValidator(settings, 'formEdit');
+
+newElementValidator.enableValidation();
+formAvatarValidator.enableValidation();
+formProfileValidator.enableValidation()
 
 // [Важно!] (можно свернуть)
 // Все экземпляры классов создаются только в файле index.js
@@ -75,13 +79,13 @@ const popupConsent = new Popup('#popupConsent');
 popupConsent.setEventListeners();
 
 function handlebtnTrashClick(evt) {
-  popupConsent.open();              // ToDo [inkxivv]
+  popupConsent.open();
   // Create function for delete card after consent
   setAction('findAndRemoveCard', () => {
     api.deleteCard(card_id)
       .then(() => {
         evt.target.closest('.element').remove();
-        popupConsent.close();       // ToDo [inkxivv]
+        popupConsent.close();
       })
       .catch(err => console.log(err));
   });
@@ -110,7 +114,7 @@ function handleClickBtnAdd() {
   popupNewElement.open()
   // newElementValidator.resetFormFields();  // ToDo [inkxivv]
   // newElementValidator.resetFormErrors();  // ToDo [inkxivv]
-  // openPopup(popupNewElement);             // ToDo [inkxivv]
+  // newElementValidator.resetFormErrors();
 }
 
 const popupEdit = new PopupWithForm('#popupEdit');
@@ -121,7 +125,6 @@ function handleClickBtnEdit() {
   //inputUserName.value = userName.textContent;         // ToDo [inkxivv] Replace as method of popup class
   //inputUserStatus.value = userStatus.textContent;     // ToDo [inkxivv] Replace as method of popup class
   // formProfileValidator.resetFormError();                // ToDo [inkxivv]
-  // openPopup(popupEdit);                                 // ToDo [inkxivv]
 }
 
 const popupAvatar = new PopupWithForm('#popupAvatar');
