@@ -19,6 +19,11 @@ export const settings = {                 // ToDo [teplokotov] Rename after refa
 export const btnEdit = document.querySelector('.btn-edit');
 export const btnAdd = document.querySelector('.btn-add');
 export const btnEditAvatar = document.querySelector('.profile__avatar');
+export const inputUserName = document.querySelector('#profileName');
+export const inputUserStatus = document.querySelector('#profileStatus');
+export const inputAvatarLink = document.querySelector('#avatarLink');
+export const elementName = document.querySelector('#elementName');
+export const elementLink = document.querySelector('#elementLink');
 
 export function setAction(name, func) {
   actions[name] = func;
