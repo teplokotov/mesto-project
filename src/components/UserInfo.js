@@ -10,9 +10,9 @@ export default class UserInfo {
   getUserInfo() {
     return {
       userId: this._userId,
-      userName: this._userName,
-      userStatus: this._userStatus,
-      userPhoto: this._userPhoto,
+      profileName: this._userName.textContent,
+      profileStatus: this._userStatus.textContent,
+      avatarLink: this._userPhoto.src,
     };
   }
 
