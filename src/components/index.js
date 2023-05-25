@@ -2,20 +2,30 @@
 import '../pages/index.css';
 
 // Utils (Constants, Settings...)
-import { config, setAction, btnEdit, btnAdd, btnEditAvatar, settings, inputUserName, inputUserStatus, inputAvatarLink, elementLink, elementName, actions } from '../components/utils.js';
+import {  config,
+          setAction,
+          btnEdit,
+          btnAdd,
+          btnEditAvatar,
+          settings,
+          inputUserName,
+          inputUserStatus,
+          inputAvatarLink,
+          elementLink,
+          elementName,
+          actions,
+        } from '../components/utils.js';
 
-// Classes of teplokotov:
+// Classes
 import Api from '../components/Api.js';
 import Card from '../components/Card.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
-
-// Classes of inkxivv:
 import FormValidator from '../components/FormValidator.js';
-import Popup from '../components/Popup.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 
+// Instances of classes
 const api = new Api(config);
 const userInfo = new UserInfo({
   selectorUserName: '.info__name',
@@ -44,14 +54,6 @@ popupAvatar.setEventListeners();
 
 let section;
 
-// [Важно!] (можно свернуть)
-// Все экземпляры классов создаются только в файле index.js
-// В конструкторе классов не содержится вызов различных методов — только объявление полей и привязка контекста выполнения методов класса.
-// Описание классов:
-// https://practicum.yandex.ru/learn/web-plus/courses/5fdf60f9-19c5-4c92-acb4-de8a5178d826/sprints/37311/topics/b968bfe5-3f2c-4b4a-a7df-b7f605f3d025/lessons/a81663db-9032-49a7-93d6-6ea73f49b5e7/
-// Чек-лист:
-// https://code.s3.yandex.net/web-developer/checklists-pdf/web-plus/checklist-10.pdf
-
 // Get user data from server and update information on page
 Promise.all([api.getUserData(), api.getInitialCards()])
   .then(([userData, cards]) => {
@@ -77,6 +79,15 @@ function createCard(data, userId) {
   });
   return card.draw();
 };
+
+// Open modal window (Edit profile)
+btnEdit.addEventListener('click', handleClickBtnEdit);
+
+// Open modal window (Add new card)
+btnAdd.addEventListener('click', handleClickBtnAdd);
+
+// Open modal window (Change avatar)
+btnEditAvatar.addEventListener('click', handleClickBtnEditAvatar);
 
 function handlebtnLikeClick(btnLike, cardElementCounter, cardId) {
   let action = btnLike.classList.contains('btn-like_liked') ? 'DELETE' : 'PUT';
@@ -104,13 +115,12 @@ function handlebtnTrashClick(evt, cardId) {
 };
 
 function handleImageClick(name, link) {
-  popupShowPhoto.open({name, link});
+  popupShowPhoto.open({ name, link });
 }
 
 function handleClickBtnAdd() {
   newElementValidator.resetFormError();
   popupNewElement.open()
-  // newElementValidator.resetFormFields();  // ToDo [inkxivv]
 }
 
 function handleClickBtnEdit() {
@@ -123,15 +133,6 @@ function handleClickBtnEditAvatar() {
   formAvatarValidator.resetFormError();
   popupAvatar.open();
 }
-
-// Open modal window (Edit profile)
-btnEdit.addEventListener('click', handleClickBtnEdit);
-
-// Open modal window (Add new card)
-btnAdd.addEventListener('click', handleClickBtnAdd);
-
-// Open modal window (Change avatar)
-btnEditAvatar.addEventListener('click', handleClickBtnEditAvatar);
 
 function handleSubmitFormConsent(evt) {
   evt.preventDefault();

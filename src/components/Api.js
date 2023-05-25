@@ -61,4 +61,5 @@ export default class Api {
       body: JSON.stringify({'avatar': link})
     });
   }
+  
 }

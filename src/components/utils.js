@@ -8,7 +8,7 @@ export const config = {
 }
 
 // Selectors for forms
-export const settings = {                 // ToDo [teplokotov] Rename after refactor
+export const settings = {
   formSelector: '.form',
   inputSelector: '.form__input',
   submitButtonSelector: '.btn-save',
@@ -24,7 +24,7 @@ export const inputUserStatus = document.querySelector('#profileStatus');
 export const inputAvatarLink = document.querySelector('#avatarLink');
 export const elementName = document.querySelector('#elementName');
 export const elementLink = document.querySelector('#elementLink');
-export const actions = {}; 
+export const actions = {};
 
 export function setAction(name, func) {
   actions[name] = func;
