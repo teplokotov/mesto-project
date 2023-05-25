@@ -4,8 +4,9 @@ export default class PopupWithForm extends Popup {
 
   constructor(selector, submitFunc) {
     super(selector);
-    this._formElement= this._popup.querySelector('.form');
+    this._formElement = this._popup.querySelector('.form');
     this._inputList = Array.from(this._formElement.querySelectorAll('.form__input'));
+    this._saveBtn = this._formElement.querySelector('.btn-save');
     this._submitForm = submitFunc;
   }
 
@@ -19,12 +20,23 @@ export default class PopupWithForm extends Popup {
     return this._inputValues;
   }
 
-  setEventListeners() {
+  setEventListeners() { // Исправленный метод
     super.setEventListeners();
-    this._formElement.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-      this._submitForm(this._getInputValues());
-    })
+    this._formElement.addEventListener('submit', this._submitForm);
+  }
+
+  setInputValues(data) {
+    this._inputList.forEach((inputElement) => {
+      inputElement.value = data[inputElement.name];
+    });
+  }
+
+  renderSaving(isLoading) {
+    if (isLoading) {
+      this._saveBtn.textContent = 'Сохранение...';
+    } else {
+      this._saveBtn.textContent = 'Сохранить';
+    }
   }
 
   close() {
@@ -32,3 +44,4 @@ export default class PopupWithForm extends Popup {
     this._formElement.reset();
   }
 }
+
