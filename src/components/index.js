@@ -141,8 +141,9 @@ function handleSubmitFormNewElement(evt) {
   api.setPhoto(elementName.value, elementLink.value)
   .then(res => {
     console.log(res);
+    popupNewElement.close();
   })
-  .catch(err = console.log(err))
+  .catch(err => console.log(err))
   .finally(() => {popupNewElement.renderSaving(false)});
 }
 
