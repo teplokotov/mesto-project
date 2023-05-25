@@ -42,6 +42,8 @@ popupNewElement.setEventListeners();
 popupEdit.setEventListeners();
 popupAvatar.setEventListeners();
 
+let section;
+
 // [Важно!] (можно свернуть)
 // Все экземпляры классов создаются только в файле index.js
 // В конструкторе классов не содержится вызов различных методов — только объявление полей и привязка контекста выполнения методов класса.
@@ -56,7 +58,7 @@ Promise.all([api.getUserData(), api.getInitialCards()])
     // Draw profile information
     userInfo.setUserInfo(userData);
     // Initial drawing cards
-    const section = new Section({
+    section = new Section({
       items: cards,
       renderer: (data) => {
         const itemElement = createCard(data, userData._id);
@@ -143,7 +145,8 @@ function handleSubmitFormNewElement(evt) {
 
   api.setPhoto(elementName.value, elementLink.value)
   .then(res => {
-    console.log(res);
+    const itemElement = createCard(res, res.owner._id);
+    section.addItem(itemElement, 'prepend');
     popupNewElement.close();
   })
   .catch(err => console.log(err))
