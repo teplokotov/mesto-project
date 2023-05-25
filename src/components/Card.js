@@ -22,9 +22,10 @@ export default class Card {
 
   _setEventListeners() {
     this._btnLike.addEventListener('click', () => this._handlebtnLikeClick(this._btnLike, this._cardElementCounter, this._cardId));
-    if (this._userId == this._ownerId) this._btnTrash.addEventListener('click', (evt) => this._handlebtnTrashClick(evt));
+    if (this._userId == this._ownerId) this._btnTrash.addEventListener('click', (evt) => this._handlebtnTrashClick(evt, this._cardId));
     this._cardElementImage.addEventListener('click', () => this._handleImageClick(this._name, this._link));
   }
+  
 
   draw() {
 

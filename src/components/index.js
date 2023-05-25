@@ -2,7 +2,7 @@
 import '../pages/index.css';
 
 // Utils (Constants, Settings...)
-import { config, setAction, btnEdit, btnAdd, btnEditAvatar, settings, inputUserName, inputUserStatus, inputAvatarLink, elementLink, elementName } from '../components/utils.js';
+import { config, setAction, btnEdit, btnAdd, btnEditAvatar, settings, inputUserName, inputUserStatus, inputAvatarLink, elementLink, elementName, actions } from '../components/utils.js';
 
 // Classes of teplokotov:
 import Api from '../components/Api.js';
@@ -87,11 +87,12 @@ function handlebtnLikeClick(btnLike, cardElementCounter, cardId) {
     .catch(err => console.log(err));
 };
 
-function handlebtnTrashClick(evt) {
+function handlebtnTrashClick(evt, cardId) {
+  popupConsent.renderSaving(false);
   popupConsent.open();
   // Create function for delete card after consent
   setAction('findAndRemoveCard', () => {
-    api.deleteCard(card_id)
+    api.deleteCard(cardId)
       .then(() => {
         evt.target.closest('.element').remove();
         popupConsent.close();
@@ -132,6 +133,8 @@ btnEditAvatar.addEventListener('click', handleClickBtnEditAvatar);
 
 function handleSubmitFormConsent(evt) {
   evt.preventDefault();
+  popupConsent.renderSaving(true);
+  actions.findAndRemoveCard();
 }
 
 function handleSubmitFormNewElement(evt) {
