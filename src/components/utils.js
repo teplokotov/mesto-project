@@ -24,6 +24,7 @@ export const inputUserStatus = document.querySelector('#profileStatus');
 export const inputAvatarLink = document.querySelector('#avatarLink');
 export const elementName = document.querySelector('#elementName');
 export const elementLink = document.querySelector('#elementLink');
+export const actions = {}; 
 
 export function setAction(name, func) {
   actions[name] = func;
