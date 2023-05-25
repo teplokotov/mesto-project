@@ -2,7 +2,7 @@
 import '../pages/index.css';
 
 // Utils (Constants, Settings...)
-import { config, setAction, btnEdit, btnAdd, btnEditAvatar, settings } from '../components/utils.js';
+import { config, setAction, btnEdit, btnAdd, btnEditAvatar, settings, inputUserName, inputUserStatus, inputAvatarLink, elementLink, elementName } from '../components/utils.js';
 
 // Classes of teplokotov:
 import Api from '../components/Api.js';
@@ -28,7 +28,19 @@ const formProfileValidator = new FormValidator(settings, 'formEdit');
 
 newElementValidator.enableValidation();
 formAvatarValidator.enableValidation();
-formProfileValidator.enableValidation()
+formProfileValidator.enableValidation();
+
+const popupShowPhoto = new PopupWithImage('#popupShowPhoto');
+const popupConsent = new PopupWithForm('#popupConsent', handleSubmitFormConsent);
+const popupNewElement = new PopupWithForm('#popupNewElement', handleSubmitFormNewElement);
+const popupEdit = new PopupWithForm('#popupEdit', handleSubmitFormEdit);
+const popupAvatar = new PopupWithForm('#popupAvatar', handleSubmitFormAvatar);
+
+popupShowPhoto.setEventListeners();
+popupConsent.setEventListeners();
+popupNewElement.setEventListeners();
+popupEdit.setEventListeners();
+popupAvatar.setEventListeners();
 
 // [Важно!] (можно свернуть)
 // Все экземпляры классов создаются только в файле index.js
@@ -75,9 +87,6 @@ function handlebtnLikeClick(btnLike, cardElementCounter, cardId) {
     .catch(err => console.log(err));
 };
 
-const popupConsent = new Popup('#popupConsent');
-popupConsent.setEventListeners();
-
 function handlebtnTrashClick(evt) {
   popupConsent.open();
   // Create function for delete card after consent
@@ -91,6 +100,27 @@ function handlebtnTrashClick(evt) {
   });
 };
 
+function handleImageClick(name, link) {
+  popupShowPhoto.open({name, link});
+}
+
+function handleClickBtnAdd() {
+  newElementValidator.resetFormError();
+  popupNewElement.open()
+  // newElementValidator.resetFormFields();  // ToDo [inkxivv]
+}
+
+function handleClickBtnEdit() {
+  formProfileValidator.resetFormError();
+  popupEdit.setInputValues(userInfo.getUserInfo());
+  popupEdit.open();
+}
+
+function handleClickBtnEditAvatar() {
+  formAvatarValidator.resetFormError();
+  popupAvatar.open();
+}
+
 // Open modal window (Edit profile)
 btnEdit.addEventListener('click', handleClickBtnEdit);
 
@@ -100,37 +130,44 @@ btnAdd.addEventListener('click', handleClickBtnAdd);
 // Open modal window (Change avatar)
 btnEditAvatar.addEventListener('click', handleClickBtnEditAvatar);
 
-const popupShowPhoto = new PopupWithImage('#popupShowPhoto');
-popupShowPhoto.setEventListeners();
-
-function handleImageClick(name, link) {
-  popupShowPhoto.open({name, link});
+function handleSubmitFormConsent(evt) {
+  evt.preventDefault();
 }
 
-const popupNewElement = new PopupWithForm('#popupNewElement');
-popupNewElement.setEventListeners();
+function handleSubmitFormNewElement(evt) {
+  evt.preventDefault();
+  popupNewElement.renderSaving(true);
 
-function handleClickBtnAdd() {
-  popupNewElement.open()
-  // newElementValidator.resetFormFields();  // ToDo [inkxivv]
-  // newElementValidator.resetFormErrors();  // ToDo [inkxivv]
-  // newElementValidator.resetFormErrors();
+  api.setPhoto(elementName.value, elementLink.value)
+  .then(res => {
+    console.log(res);
+  })
+  .catch(err = console.log(err))
+  .finally(() => {popupNewElement.renderSaving(false)});
 }
 
-const popupEdit = new PopupWithForm('#popupEdit');
-popupEdit.setEventListeners();
+function handleSubmitFormEdit(evt) {
+  evt.preventDefault();
+  popupEdit.renderSaving(true);
 
-function handleClickBtnEdit() {
-  popupEdit.open();
-  //inputUserName.value = userName.textContent;         // ToDo [inkxivv] Replace as method of popup class
-  //inputUserStatus.value = userStatus.textContent;     // ToDo [inkxivv] Replace as method of popup class
-  // formProfileValidator.resetFormError();                // ToDo [inkxivv]
+  api.setUserData(inputUserName.value, inputUserStatus.value)
+  .then(res => {
+      userInfo.setUserInfo(res);
+      popupEdit.close();
+  })
+  .catch(err => console.log(err))
+  .finally(() => popupEdit.renderSaving(false));
 }
 
-const popupAvatar = new PopupWithForm('#popupAvatar');
-popupAvatar.setEventListeners();
+function handleSubmitFormAvatar(evt) {
+  evt.preventDefault();
+  popupAvatar.renderSaving(true);
 
-function handleClickBtnEditAvatar() {
-  popupAvatar.open();
+  api.setAvatar(inputAvatarLink.value)
+  .then(res => {
+    userInfo.setUserInfo(res);
+    popupAvatar.close();
+  })
+  .catch(err => console.log(err))
+  .finally(() => popupAvatar.renderSaving(false))
 }
-
