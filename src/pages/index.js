@@ -1,9 +1,8 @@
 // Styles
 import '../pages/index.css';
 
-// Utils (Constants, Settings...)
+// Constants
 import {  config,
-          setAction,
           btnEdit,
           btnAdd,
           btnEditAvatar,
@@ -14,7 +13,10 @@ import {  config,
           elementLink,
           elementName,
           actions,
-        } from '../components/utils.js';
+        } from '../utils/constants.js';
+
+// Utils
+import { setAction } from '../utils/utils.js';
 
 // Classes
 import Api from '../components/Api.js';
