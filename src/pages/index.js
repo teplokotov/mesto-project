@@ -92,13 +92,10 @@ btnAdd.addEventListener('click', handleClickBtnAdd);
 btnEditAvatar.addEventListener('click', handleClickBtnEditAvatar);
 
 function handlebtnLikeClick(btnLike, cardElementCounter, cardId) {
-  let action = btnLike.classList.contains('btn-like_liked') ? 'DELETE' : 'PUT';
+  const action = this.isLiked() ? 'DELETE' : 'PUT';
   // Change counter and toggle 'like' button after get response
   api.toggleLike(cardId, action)
-    .then(res => {
-      cardElementCounter.textContent = res.likes.length > 0 ? res.likes.length : '';
-      btnLike.classList.toggle('btn-like_liked');
-    })
+    .then(res => this.toggleLike(res))
     .catch(err => console.log(err));
 };
 
