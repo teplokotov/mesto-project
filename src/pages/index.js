@@ -100,16 +100,17 @@ function handlebtnLikeClick(btnLike, cardElementCounter, cardId) {
 };
 
 function handlebtnTrashClick(evt, cardId) {
-  popupConsent.renderSaving(false);
   popupConsent.open();
   // Create function for delete card after consent
   setAction('findAndRemoveCard', () => {
+    popupConsent.renderSaving(true);
     api.deleteCard(cardId)
       .then(() => {
         evt.target.closest('.element').remove();
         popupConsent.close();
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
+      .finally(() => popupConsent.renderSaving(false));
   });
 };
 
@@ -135,7 +136,7 @@ function handleClickBtnEditAvatar() {
 
 function handleSubmitFormConsent(evt) {
   evt.preventDefault();
-  popupConsent.renderSaving(true);
+  //popupConsent.renderSaving(true);
   actions.findAndRemoveCard();
 }
 
@@ -150,7 +151,7 @@ function handleSubmitFormNewElement(evt) {
     popupNewElement.close();
   })
   .catch(err => console.log(err))
-  .finally(() => {popupNewElement.renderSaving(false)});
+  .finally(() => popupNewElement.renderSaving(false));
 }
 
 function handleSubmitFormEdit(evt) {
@@ -176,5 +177,5 @@ function handleSubmitFormAvatar(evt) {
     popupAvatar.close();
   })
   .catch(err => console.log(err))
-  .finally(() => popupAvatar.renderSaving(false))
+  .finally(() => popupAvatar.renderSaving(false));
 }
