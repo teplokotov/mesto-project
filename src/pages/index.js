@@ -145,7 +145,8 @@ function handleSubmitFormNewElement(evt) {
   evt.preventDefault();
   popupNewElement.renderSaving(true);
 
-  api.setPhoto(elementName.value, elementLink.value)
+  api.setPhoto(popupNewElement.getInputValue('elementName'),
+               popupNewElement.getInputValue('elementLink'))
   .then(res => {
     const itemElement = createCard(res, res.owner._id);
     section.addItem(itemElement, 'prepend');
@@ -159,7 +160,8 @@ function handleSubmitFormEdit(evt) {
   evt.preventDefault();
   popupEdit.renderSaving(true);
 
-  api.setUserData(inputUserName.value, inputUserStatus.value)
+  api.setUserData(popupEdit.getInputValue('profileName'),
+                  popupEdit.getInputValue('profileStatus'))
   .then(res => {
       userInfo.setUserInfo(res);
       popupEdit.close();
@@ -172,7 +174,7 @@ function handleSubmitFormAvatar(evt) {
   evt.preventDefault();
   popupAvatar.renderSaving(true);
 
-  api.setAvatar(inputAvatarLink.value)
+  api.setAvatar(popupAvatar.getInputValue('avatarLink'))
   .then(res => {
     userInfo.setUserInfo(res);
     popupAvatar.close();
