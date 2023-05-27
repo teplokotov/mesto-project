@@ -91,11 +91,12 @@ btnAdd.addEventListener('click', handleClickBtnAdd);
 // Open modal window (Change avatar)
 btnEditAvatar.addEventListener('click', handleClickBtnEditAvatar);
 
-function handlebtnLikeClick(btnLike, cardElementCounter, cardId) {
-  const action = this.isLiked() ? 'DELETE' : 'PUT';
+function handlebtnLikeClick(card) {
+  const action = card.isLiked() ? 'DELETE' : 'PUT';
+  const cardId = card.getId();
   // Change counter and toggle 'like' button after get response
   api.toggleLike(cardId, action)
-    .then(res => this.toggleLike(res))
+    .then(res => card.toggleLike(res))
     .catch(err => console.log(err));
 };
 

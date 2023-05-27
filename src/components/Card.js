@@ -21,7 +21,7 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._btnLike.addEventListener('click', () => this._handlebtnLikeClick(this._btnLike, this._cardElementCounter, this._cardId));
+    this._btnLike.addEventListener('click', () => this._handlebtnLikeClick(this));
     if (this._userId == this._ownerId) this._btnTrash.addEventListener('click', (evt) => this._handlebtnTrashClick(evt, this._cardId));
     this._cardElementImage.addEventListener('click', () => this._handleImageClick(this._name, this._link));
   }
@@ -33,6 +33,10 @@ export default class Card {
   toggleLike(res) {
     this._cardElementCounter.textContent = res.likes.length > 0 ? res.likes.length : '';
     this._btnLike.classList.toggle('btn-like_liked');
+  }
+
+  getId() {
+    return this._cardId;
   }
 
   draw() {
