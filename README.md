@@ -1,7 +1,13 @@
 # **Проект «Mesto»**
 - Проект Яндекс Практикума
-- Автор: Филипп Добриков, студент 23 когорты Web+
+- Автор: Филипп Добриков, студент 23 когорты Web+ ([Github](https://github.com/teplokotov)) philipp.dobrikov@yandex.ru
 - Результат: [Ссылка](https://teplokotov.github.io/mesto-project/)
+## Этап 5: Проект Mesto на ООП. Парное программирование
+### Описание
+- Соавтор: Джаният Багандова, студентка 23 когорты Web+ ([Github](https://github.com/inkxivv)) janiyatbagandova@yandex.ru
+- Отправлен на проверку 25.05.2023 / дедлайн 02.06.2023
+- Задание: [Ссылка](https://practicum.yandex.ru/learn/web-plus/courses/5fdf60f9-19c5-4c92-acb4-de8a5178d826/sprints/37311/topics/b968bfe5-3f2c-4b4a-a7df-b7f605f3d025/lessons/a81663db-9032-49a7-93d6-6ea73f49b5e7/)
+- Чеклист по самопроверке №10: [Ссылка](https://code.s3.yandex.net/web-developer/checklists-pdf/web-plus/checklist-10.pdf)
 ## Этап 4: Взаимодействие с сервером
 ### Описание
 - Отправлен на проверку 22.04.2023 / дедлайн 07.05.2023
